@@ -5,13 +5,14 @@ namespace sfwiki {
 
 
 	BEGIN_SUBRECCREATE(CBookRecord, CItem1Record)
-		//DEFINE_SUBRECCREATE(SR_NAME_DESC, CSrLStringSubrecord::Create)
-		//DEFINE_RSUBRECCREATE(SR_NAME_MODT, CSrDataSubrecord::Create)
-		//DEFINE_SUBRECCREATE(SR_NAME_DATA, CSrBookDataSubrecord::Create)
-		//DEFINE_SUBRECCREATE(SR_NAME_INAM, CSrFormidSubrecord::Create)
-		//DEFINE_SUBRECCREATE(SR_NAME_CNAM, CSrLStringSubrecord::Create)
-		//DEFINE_SUBRECCREATE(SR_NAME_YNAM, CSrFormidSubrecord::Create)
-		//DEFINE_SUBRECCREATE(SR_NAME_VMAD, CSrVmadSubrecord::Create)
+		DEFINE_SUBRECCREATE(NAME_DESC, CLStringSubrecord::Create)
+		//DEFINE_SUBRECCREATE(NAME_MODT, CDataSubrecord::Create)
+		//DEFINE_SUBRECCREATE(NAME_DATA, CBookDataSubrecord::Create)
+		//DEFINE_SUBRECCREATE(NAME_INAM, CFormidSubrecord::Create)
+		DEFINE_SUBRECCREATE(NAME_CNAM, CLStringSubrecord::Create)
+		DEFINE_SUBRECCREATE(NAME_FULL, CLStringSubrecord::Create)
+		//DEFINE_SUBRECCREATE(NAME_YNAM, CFormidSubrecord::Create)
+		//DEFINE_SUBRECCREATE(NAME_VMAD, CVmadSubrecord::Create)
 	END_SUBRECCREATE()
 
 

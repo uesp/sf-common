@@ -115,6 +115,14 @@ namespace sfwiki {
 		/* Deletes the specified record */
 		virtual bool DeleteRecord(CRecord* pRecord);
 
+		CBaseRecord* FindFormId(const formid_t FormID);
+
+		template <typename T> T* FindFormId(const formid_t FormID) {
+			CBaseRecord* pRecord = FindFormId(FormID);
+			if (pRecord == nullptr) return nullptr;
+			return dynamic_cast<T*>(pRecord);
+		}
+
 		/* Access the top level groups/records */
 		CBaseRecord* GetTopLevelRecord(const dword Index) { return m_Records[Index]; }
 		size_t       GetNumTopLevelRecords(void) { return m_Records.size(); }
@@ -133,6 +141,8 @@ namespace sfwiki {
 
 		bool IsLocalStrings(void) const { return m_pHeader == NULL ? false : m_pHeader->IsLocalStrings(); }
 		virtual bool IsLoadLocalString(void) const { return IsLocalStrings(); }
+
+		string* FindLocalString(const lstringid_t ID);
 
 		/* Initialize a new file */
 		void InitializeNew(void);

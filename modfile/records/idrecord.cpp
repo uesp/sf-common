@@ -4,8 +4,8 @@ namespace sfwiki {
 
 
 	BEGIN_SUBRECCREATE(CIdRecord, CRecord)
-		//DEFINE_SUBRECCREATE(NAME_EDID, CStringSubrecord::Create)
-		//DEFINE_SUBRECCREATE(NAME_OBND, CBoundsSubrecord::Create)
+		DEFINE_SUBRECCREATE(NAME_EDID, CStringSubrecord::Create)
+		DEFINE_SUBRECCREATE(NAME_OBND, CBoundsSubrecord::Create)
 	END_SUBRECCREATE()
 
 
@@ -13,8 +13,6 @@ namespace sfwiki {
 	{
 		//m_pBounds = NULL;
 	}
-
-
 
 	 
 	void CIdRecord::Destroy(void)

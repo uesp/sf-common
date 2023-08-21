@@ -33,6 +33,30 @@ namespace sfwiki {
 	}
 
 
+	CBaseRecord* CGroup::FindFormId(const formid_t FormID)
+	{
+		for (auto i : m_Records)
+		{
+			if (i->IsGroup())
+			{
+				auto pGroup = dynamic_cast<CGroup *>(i);
+
+				if (pGroup)
+				{
+					auto pRecord = pGroup->FindFormId(FormID);
+					if (pRecord) return pRecord;
+				}
+			}
+			else if (i->GetFormID() == FormID)
+			{
+				return i;
+			}
+		}
+
+		return nullptr;
+	}
+
+
 	void CGroup::LoadLocalStrings()
 	{
 		static int s_Level = 0;

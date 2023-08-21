@@ -149,6 +149,30 @@ namespace sfwiki {
 	}
 
 
+	CBaseRecord* CEspFile::FindFormId(const formid_t FormID)
+	{
+		for (auto i : m_Records)
+		{
+			if (i->IsGroup())
+			{
+				auto pGroup = dynamic_cast<CGroup *>(i);
+
+				if (pGroup)
+				{
+					auto pRecord = pGroup->FindFormId(FormID);
+					if (pRecord) return pRecord;
+				}
+			}
+			else if (i->GetFormID() == FormID)
+			{
+				return i;
+			}
+		}
+
+		return nullptr;
+	}
+
+
 	CTypeGroup* CEspFile::GetTypeGroup(const rectype_t Type)
 	{
 		CBaseRecord*	pRecord;
@@ -212,12 +236,24 @@ namespace sfwiki {
 		SystemLog.Printf("End read position for file '%s' is 0x%08X (0x%08X bytes left over).", pFilename, (int) lastPos, (int) diffSize);
 		m_File.Close();
 
+		if (IsLocalStrings())
+		{
+			LoadLocalStrings();
+		}
+
 		CRecord::DestroyIOBuffers();
 
 		return (Result);
 	}
 
 
+	string* CEspFile::FindLocalString(const lstringid_t ID)
+	{
+		if (m_StringMap.find(ID) == m_StringMap.end()) return nullptr;
+		return m_StringMap[ID];
+	}
+
+	
 	void CEspFile::MakeStringMap()
 	{
 		m_StringMap.clear();

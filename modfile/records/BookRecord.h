@@ -2,8 +2,8 @@
 #define __SFWIKI_BOOKRECORD_H
 
 #include "item1record.h"
+#include "../subrecords/lstringsubrecord.h"
 //#include "../subrecords/srbookdatasubrecord.h"
-//#include "../subrecords/srlstringsubrecord.h"
 //#include "../subrecords/srvmadsubrecord.h"
 
 

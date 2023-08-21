@@ -6,6 +6,9 @@
 #include "../../common/memfile.h"
 #include "../subrecords/subrecord.h"
 #include "baserecord.h"
+
+#include "../subrecords/lstringsubrecord.h"
+#include "../subrecords/formidsubrecord.h"
   //#include "../subrecords/srdwordsubrecord.h"
   //#include "../subrecords/srlongsubrecord.h"
   //#include "../subrecords/srwordsubrecord.h"
@@ -156,7 +159,14 @@ namespace sfwiki {
 		size_t DeleteSubrecords(const rectype_t Type);
 
 		/* Find a record based on its formID */
-		CBaseRecord* FindFormID(const formid_t FormID) { return (m_Header.FormID == FormID ? this : nullptr); }
+		//CBaseRecord* FindFormID(const formid_t FormID) { return (m_Header.FormID == FormID ? this : nullptr); }
+		int FindSubrecord(const rectype_t Type, const int StartIndex = 0);
+
+		template <typename T> T* FindSubrecord(const rectype_t Type, const int StartIndex = 0) {
+			int i = FindSubrecord(Type, StartIndex);
+			if (i < 0) return nullptr;
+			return dynamic_cast<T*>(m_Subrecords[i]);
+		}
 
 		/* Computes the size in bytes needed to output all sub-records */
 		dword GetSubrecordSize(void);

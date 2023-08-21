@@ -110,6 +110,8 @@ namespace sfwiki {
 		/* Simply deletes the given record */
 		bool DeleteRecord(CRecord* pRecord) { return DeleteChildRecord((CBaseRecord *)pRecord); }
 
+		CBaseRecord* FindFormId(const formid_t FormID);
+
 		/* Get class members */
 		const rectype_t			GetRecordType(void) const { return (m_Header.RecordType); }
 		int						GetType(void) const { return (m_Header.GroupType); }

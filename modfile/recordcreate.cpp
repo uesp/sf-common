@@ -1,11 +1,17 @@
 #include "groups/typegroup.h"
 #include "records/record.h"
 #include "records/tes4record.h"
+#include "records/bookrecord.h"
+#include "records/equprecord.h"
+#include "records/weaprecord.h"
 
 namespace sfwiki {
 
 	static reccreate_t s_CreateRecords[] = {
+		{ &NAME_BOOK, CBookRecord::Create },
+		{ &NAME_EQUP, CEqupRecord::Create },
 		{ &NAME_TES4, CTes4Record::Create },
+		{ &NAME_WEAP, CWeapRecord::Create },
 		{ NULL,		 NULL }	/* Must be last */
 	};
 

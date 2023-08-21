@@ -240,6 +240,18 @@ namespace sfwiki {
 	}
 
 
+	int CRecord::FindSubrecord(const rectype_t Type, const int StartIndex)
+	{
+		for (int i = StartIndex; i < m_Subrecords.size(); ++i)
+		{
+			auto pSubrecord = m_Subrecords[i];
+			if (pSubrecord->GetRecordType() == Type) return i;
+		}
+
+		return -1;
+	}
+
+
 	CSubrecord* CRecord::GetSubrecord(CSubrecord* pSubrecord, const int Offset, const rectype_t Type) {
 		CSubrecord* pDestSubrecord;
 
