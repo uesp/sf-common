@@ -1,4 +1,6 @@
 #include "espfile.h"
+#include "common/utils.h"
+#include <algorithm>
 
 namespace sfwiki {
 	
@@ -85,7 +87,7 @@ namespace sfwiki {
 		if (pRecord->GetRecordType() == NAME_TES4)
 		{
 			//m_pHeader = SrCastClass(CSrTes4Record, pRecord);
-			m_pHeader = pRecord;
+			m_pHeader = dynamic_cast<CTes4Record *>(pRecord);
 		}
 		/* Update the overall record count */
 		else if (m_pHeader != NULL)
@@ -195,6 +197,9 @@ namespace sfwiki {
 		Result = CRecord::InitIOBuffers();
 		if (!Result) return (false);
 
+		Result = LoadStringFiles();
+		MakeStringMap();
+
 		Result = m_File.Open(pFilename, "rb");
 		if (!Result) return (false);
 
@@ -211,7 +216,71 @@ namespace sfwiki {
 
 		return (Result);
 	}
+
+
+	void CEspFile::MakeStringMap()
+	{
+		m_StringMap.clear();
+		m_StringMap.rehash(100000);
+
+		MakeStringMap(m_ILStringFile);
+		MakeStringMap(m_DLStringFile);
+		MakeStringMap(m_LStringFile);
+	}
+
+
+	void CEspFile::MakeStringMap(CStringFile& StringFile)
+	{
+
+		for (dword j = 0; j < StringFile.GetStrings().size(); ++j)
+		{
+			stringrecord_h& StringRecord = StringFile.GetStrings()[j];
+
+			auto count = m_StringMap.count(StringRecord.ID);
+			if (count != 0) SystemLog.Printf("\tWARNING: String Map Collision for ID 0x%08X!", StringRecord.ID);
+
+			m_StringMap[StringRecord.ID] = &StringRecord.String;
+		}
+
+	}
+
+
+	void CEspFile::LoadLocalStrings()
+	{
+		for (auto i : m_Records)
+		{
+			i->LoadLocalStrings();
+		}
+	}
 	
+
+	bool CEspFile::LoadStringFile(CStringFile& StringFile, const string Filename)
+	{
+		bool Result;
+
+		StringFile.Destroy();
+
+			/* A non-existant string file is not an error */
+		if (!FileExists(Filename)) return true;
+
+		SystemLog.Printf("Loading strings file '%s'...", Filename.c_str());
+
+		Result = StringFile.Load(Filename);
+		return Result;
+	}
+
+
+	bool CEspFile::LoadStringFiles()
+	{
+		bool Result;
+
+		Result = LoadStringFile(m_LStringFile, CreateStringFilename(m_Filename, "STRINGS"));
+		Result &= LoadStringFile(m_DLStringFile, CreateStringFilename(m_Filename, "DLSTRINGS"));
+		Result &= LoadStringFile(m_ILStringFile, CreateStringFilename(m_Filename, "ILSTRINGS"));
+
+		return Result;
+	}
+
 
 	bool CEspFile::Read()
 	{
@@ -228,8 +297,6 @@ namespace sfwiki {
 		/* Read until the end of the file if reached */
 		while (CurrentOffset < FileSize)
 		{
-
-			/* Input the record header */
 			Result = CBaseRecord::ReadBaseHeader(m_File, Header);
 			if (!Result) return (false);
 
@@ -242,15 +309,14 @@ namespace sfwiki {
 
 			if (pBaseRecord->GetRecordType() == NAME_TES4)
 			{
-				//m_pHeader = SrCastClass(CSrTes4Record, pBaseRecord);
-				m_pHeader = dynamic_cast<CRecord *>(pBaseRecord);
+							m_pHeader = dynamic_cast<CTes4Record *>(pBaseRecord);
 			}
 
-			/* Read the rest of the record/group */
+				/* Read the rest of the record/group */
 			Result = pBaseRecord->ReadData(m_File);
 			if (!Result) return (false);
 
-			/* Update current file position */
+				/* Update current file position */
 			Result = m_File.Tell(CurrentOffset);
 			if (!Result) return (false);
 		}
@@ -322,7 +388,6 @@ namespace sfwiki {
 			stats.MaxSize = pSubrecord->GetRecordSize();
 			stats.MinCount = 0;
 			stats.MaxCount = 0;
-
 		}
 		else
 		{
@@ -332,6 +397,7 @@ namespace sfwiki {
 
 		stats.TotalSize += pSubrecord->GetRecordSize();
 		++stats.TotalCount;
+		++stats.LocalCount;
 
 		return true;
 	}
@@ -343,6 +409,7 @@ namespace sfwiki {
 
 		auto& Header = pRecord->GetHeader();
 		auto& stats = m_RecordStats[Header.RecordType];
+		bool firstStat = false;
 
 		if (stats.TotalCount == 0)
 		{
@@ -351,6 +418,7 @@ namespace sfwiki {
 			stats.MaxSize = Header.Size;
 			stats.MinVersion = Header.Version;
 			stats.MaxVersion = Header.Version;
+			firstStat = true;
 		}
 		else
 		{
@@ -363,6 +431,12 @@ namespace sfwiki {
 		stats.TotalSize += Header.Size;
 		++stats.TotalCount;
 
+		for (auto i : stats.SubrecordStats)
+		{
+			auto& subrecstat = stats.SubrecordStats[i.first];
+			subrecstat.LocalCount = 0;
+		}
+
 		for (auto pSubrecord : pRecord->GetSubrecordArray())
 		{
 			CollectSubrecordStats(stats, pSubrecord);
@@ -370,10 +444,38 @@ namespace sfwiki {
 
 		for (auto i : stats.SubrecordStats)
 		{
-			auto& subrecstat = i.second;
+			auto& subrecstat = stats.SubrecordStats[i.first];
+
+			if (firstStat)
+			{
+				subrecstat.MinCount = subrecstat.LocalCount;
+				subrecstat.MaxCount = subrecstat.LocalCount;
+			}
+			else
+			{
+				if (subrecstat.LocalCount < subrecstat.MinCount) subrecstat.MinCount = subrecstat.LocalCount;
+				if (subrecstat.LocalCount > subrecstat.MaxCount) subrecstat.MaxCount = subrecstat.LocalCount;
+			}
 		}
 
 		return true;
+	}
+
+	string CEspFile::CreateSubrecStatFlags(const esprecstat_t recordStats, const espsubrecstat_t stats)
+	{
+		string buffer;
+
+		if (stats.MaxCount == 1 && stats.MinCount == 1 && stats.TotalCount == recordStats.TotalCount) buffer += "One/Record ";
+		if (stats.MaxCount > 1) buffer += "ManyAllowed ";
+		if (stats.MinCount == 1) buffer += "Required ";
+		if (stats.MinCount == 0) buffer += "Optional ";
+
+		if (stats.MinSize == stats.MaxSize) 
+			buffer += "FixedSize ";
+		else
+			buffer += "VariableSized ";
+
+		return buffer;
 	}
 
 
@@ -391,9 +493,19 @@ namespace sfwiki {
 
 		if (!File.Open(Filename, "wt")) return false;
 
+		std::vector<rectype_t> SortedTypes;
+
 		for (auto i : m_RecordStats)
 		{
-			auto& stats = i.second;
+			auto recType = i.first;
+			SortedTypes.push_back(recType);
+		}
+
+		std::sort(SortedTypes.begin(), SortedTypes.end());
+
+		for (auto i : SortedTypes)
+		{
+			auto& stats = m_RecordStats[i];
 
 			float AverageSize = (float) stats.TotalSize / (float) stats.TotalCount;
 
@@ -408,13 +520,24 @@ namespace sfwiki {
 
 			int subIndex = 1;
 
-			for (auto j : stats.SubrecordStats)
+			std::vector<rectype_t> SortedSubTypes;
+
+			for (auto i : stats.SubrecordStats)
 			{
-				auto substats = j.second;
+				auto recType = i.first;
+				SortedSubTypes.push_back(recType);
+			}
 
-				AverageSize = (float)substats.TotalSize / (float)substats.TotalCount;;
+			std::sort(SortedSubTypes.begin(), SortedSubTypes.end());
 
-				File.Printf("%d) %4.4s Subrecord Info: ? \n", subIndex, substats.RecordType.Name);
+			for (auto j : SortedSubTypes)
+			{
+				auto& substats = stats.SubrecordStats[j];
+
+				AverageSize = (float)substats.TotalSize / (float)substats.TotalCount;
+				string flags = CreateSubrecStatFlags(stats, substats);
+
+				File.Printf("%d) %4.4s Subrecord Info: %s\n", subIndex, substats.RecordType.Name, flags.c_str());
 				File.Printf("\tTotal Count = %I64u\n", substats.TotalCount);
 				File.Printf("\tAverageSize = %0.2f bytes\n", AverageSize);
 				File.Printf("\tMinSize     = %I64u bytes\n", substats.MinSize);
@@ -427,6 +550,38 @@ namespace sfwiki {
 
 			File.Printf("\n\n");
 		}
+
+		File.Printf("== Top Level Records/Groups ==\n\n");
+
+		for (auto i : m_Records)
+		{
+			CBaseRecord* pRecord = i;
+
+			if (pRecord->IsGroup())
+			{
+				auto pGroup = dynamic_cast<CGroup *>(pRecord);
+
+				if (pGroup && pGroup->GetType() == GROUP_TYPE)
+				{
+					auto pTypeGroup = dynamic_cast<CTypeGroup *>(pGroup);
+
+					if (pTypeGroup)
+						File.Printf("\t%4.4s (Group)\n", pTypeGroup->GetContainsType().Name);
+					else
+						File.Printf("\t%4.4s (Unknown Group)\n", pRecord->GetRecordType().Name);
+				}
+				else
+				{
+					File.Printf("\t%4.4s (Unknown)\n", pRecord->GetRecordType().Name);
+				}
+			}
+			else
+			{
+				File.Printf("\t%4.4s (Record)\n", pRecord->GetRecordType().Name);
+			}
+		}
+
+		File.Printf("\n\n");
 
 		return true;
 	}

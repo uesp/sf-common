@@ -3,6 +3,17 @@
 
 namespace sfwiki {
 
+	DEFINE_ALLOCATOR(CTes4Record)
+
+	BEGIN_SUBRECCREATE(CTes4Record, CRecord)
+		//DEFINE_SUBRECCREATE(SR_NAME_HEDR, CSrHedrSubrecord::Create)
+		//DEFINE_SUBRECCREATE(SR_NAME_CNAM, CSrStringSubrecord::Create)
+		//DEFINE_SUBRECCREATE(SR_NAME_SNAM, CSrStringSubrecord::Create)
+		//DEFINE_SUBRECCREATE(SR_NAME_MAST, CSrStringSubrecord::Create)
+		//DEFINE_SUBRECCREATE(SR_NAME_DATA, CSrInt64Subrecord::Create)
+		//DEFINE_SUBRECCREATE(SR_NAME_INTV, CSrDwordSubrecord::Create)
+	END_SUBRECCREATE()
+
 
 	CTes4Record::CTes4Record()
 	{

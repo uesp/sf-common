@@ -44,6 +44,14 @@ namespace sfwiki {
 		return ((((dword)(FormID)) & 0x00ffffff) | (((dword)(ModIndex)) << 24));
 	}
 
+	typedef dword lstringid_t;
+	#define NULL_STRINGID 0
+
+
+	#define DECLARE_ALLOCATOR(Class, BaseClass) \
+		public: \
+			static BaseClass* Create (void) { return new Class; } 
+	#define DEFINE_ALLOCATOR(Class) 
 
 }
 #endif

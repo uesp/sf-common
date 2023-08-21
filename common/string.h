@@ -59,6 +59,14 @@ namespace sfwiki {
 	string& tolower(string& String);
 	string& toupper(string& String);
 
+	inline string& TerminatePathString(string& PathBuffer) 
+	{
+		if (PathBuffer.length() == 0) return (PathBuffer);
+		if (PathBuffer[PathBuffer.length() - 1] != '\\') PathBuffer += '\\';
+		return (PathBuffer);
+	}
+
+
 	//typedef CSrPtrArray<CSString> CSStringArray;
 	//int SplitString(CSStringArray& SplitStrings, const CSString& Buffer, const char SplitChar, const bool IgnoreConsecutive = false);
 

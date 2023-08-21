@@ -42,6 +42,11 @@ namespace sfwiki {
 			Value = InValue; return (*this);
 		}
 
+		bool operator <(const rectype_t &s)
+		{
+			return strnicmp(this->Name, s.Name, RECTYPE_SIZE) < 0;
+		}
+
 	};
 
 #pragma pack(pop)

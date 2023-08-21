@@ -22,6 +22,18 @@ namespace sfwiki {
 		GROUP_CELLDISTANT	= 10,
 	};
 
+		/* Pointer to a class method to create a record object */
+	class CGroup;
+	typedef CGroup* (*GROUP_CREATEFUNC) (void);
+
+		/* Structure to hold creation information on groups */
+	struct groupcreate_t
+	{
+		int					GroupType;		/* Group type */
+		GROUP_CREATEFUNC	CreateMethod;	/* The creation function or static method */
+	};
+
+
 #pragma pack(push, 1)
 
 		/* Group header data that depends on the group type */
@@ -114,6 +126,8 @@ namespace sfwiki {
 
 		/* Initialize a new file */
 		virtual void InitializeNew(void) { }
+
+		void LoadLocalStrings();
 
 		virtual bool ReadData(CFile& File);
 		virtual bool Write(CFile& File);

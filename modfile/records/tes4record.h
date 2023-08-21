@@ -10,6 +10,8 @@ namespace sfwiki {
 
 	class CTes4Record : public CRecord
 	{
+		DECLARE_SUBRECCREATE()
+		DECLARE_ALLOCATOR(CTes4Record, CRecord)
 
 		/*---------- Begin Private Class Members ----------------------*/
 	private:
@@ -29,9 +31,6 @@ namespace sfwiki {
 		CTes4Record();
 		//virtual ~rTes4Record() { Destroy(); }
 		virtual void Destroy(void);
-
-		/* Return a new instance of the class */
-		static CRecord* Create(void) { return new CTes4Record; }
 
 		/* Delete all master definitions in the file */
 		void DeleteMasters(void);

@@ -33,6 +33,23 @@ namespace sfwiki {
 	}
 
 
+	void CGroup::LoadLocalStrings()
+	{
+		static int s_Level = 0;
+		CBaseRecord* pBaseRecord;
+
+		++s_Level;
+
+		for (dword i = 0; i < m_Records.size(); ++i)
+		{
+			pBaseRecord = m_Records[i];
+			pBaseRecord->LoadLocalStrings();
+		}
+
+		--s_Level;
+	}
+	
+
 	bool CGroup::ReadData(CFile& File) {
 		baseheader_t    Header;
 		CBaseRecord*    pBaseRecord;

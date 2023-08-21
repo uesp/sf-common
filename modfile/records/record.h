@@ -44,6 +44,21 @@ namespace sfwiki {
 	const int RECORD_DEFAULTVERSION = 40;
 
 
+	/* Static array for creating the record's subrecords */
+#define DECLARE_SUBRECCREATE()	protected: \
+		 static  const subreccreate_t   s_SubrecCreate; \
+		 static  const subrecentries_t  s_SubrecEntries[]; \
+		 virtual const subreccreate_t*  GetSubrecCreate(void) const { return (&s_SubrecCreate); }
+
+	/* Used to define a subrecord creation array */
+#define BEGIN_SUBRECCREATE(Class, BaseClass) \
+	const subreccreate_t   Class::s_SubrecCreate = { &BaseClass::s_SubrecCreate, Class::s_SubrecEntries }; \
+	const subrecentries_t  Class::s_SubrecEntries[] = {
+
+  #define DEFINE_SUBRECCREATE(Name, Method) { &Name, Method }, 
+
+  #define END_SUBRECCREATE() { NULL, NULL } }; 
+
 
 #pragma pack(push, 1)
 
@@ -65,8 +80,23 @@ namespace sfwiki {
 #pragma pack(pop)
 
 
+		/* Pointer to a class method to create a record object */
+	class CRecord;
+	typedef CRecord* (*REC_CREATEFUNC) (void);
+
+		/* Structure to hold information on record creation */
+	struct reccreate_t
+	{
+		const rectype_t*	pType;
+		REC_CREATEFUNC		CreateMethod;
+	};
+
+
 	class CRecord : public CBaseRecord
 	{
+		DECLARE_SUBRECCREATE()
+		DECLARE_ALLOCATOR(CRecord, CRecord)
+
 		/*---------- Begin Protected Class Members --------------------*/
 	protected:
 		recheader_t			m_Header;		/* Record header data */
@@ -91,6 +121,8 @@ namespace sfwiki {
 		bool WriteRecordSize(CFile& File, const int Offset);
 		//bool WriteDeflate(CFile& File, CMemFile& RecordData);
 
+		SUBREC_CREATEFUNC FindSubrecCreate(const rectype_t Type);
+
 
 		/*---------- Begin Public Class Methods -----------------------*/
 	public:
@@ -106,7 +138,7 @@ namespace sfwiki {
 
 		/* Create a new subrecord */
 		CSubrecord* AddNewSubrecord(const rectype_t      Type);
-		CSubrecord* AddInitNewSubrecord(const rectype_t      Type);
+		CSubrecord* AddInitNewSubrecord(const rectype_t  Type);
 		CSubrecord* AddNewSubrecord(const subrecheader_t Header);
 		CSubrecord* CreateSubrecord(const subrecheader_t Header);
 		CSubrecord* CreateSubrecord(const rectype_t      Type);
@@ -167,6 +199,8 @@ namespace sfwiki {
 		/* Initialize a new record */
 		virtual void InitializeNew(void);
 
+		virtual void LoadLocalStrings();
+
 		/* Attempt to read the record data from a file */
 		virtual bool ReadData(CFile& File);
 
@@ -187,10 +221,11 @@ namespace sfwiki {
 
 		/* Output the record to a file */
 		bool Write(CFile& File);
-
-		
 	};
 
+
+	reccreate_t* FindRecCreate(const rectype_t Type);
+	reccreate_t* FindRecCreate(const char_t* pName);
 
 }
 #endif

@@ -1,16 +1,29 @@
 #include "record.h"
 #include "../subrecords/datasubrecord.h"
 #include "common/errorhandler.h"
+#include "../espfile.h"
 
 
 namespace sfwiki {
 
-#define RECORD_DEBUG_OUTPUT 0
+	#define RECORD_DEBUG_OUTPUT 0
 
 	/* Static buffers used when loading and saving */
 	CMemFile	CRecord::s_MemFile;
 	byte*		CRecord::s_pTempBuffer = nullptr;
 	dword		CRecord::s_TempBufferSize = 0;
+
+	DEFINE_ALLOCATOR(CRecord)
+
+	const subreccreate_t CRecord::s_SubrecCreate = {
+			NULL, CRecord::s_SubrecEntries
+	};
+
+	const subrecentries_t CRecord::s_SubrecEntries[] = {
+		{ &NAME_XXXX, CDataSubrecord::Create },
+		{ NULL,		 NULL }
+	};
+	
 
 	CRecord::CRecord()
 	{
@@ -99,6 +112,9 @@ namespace sfwiki {
 		/* Add the subrecord to the record's collection */
 		m_Subrecords.push_back(pSubrecord);
 
+		/* Propagate the local string setting */
+		pSubrecord->SetLoadLocalString(m_pParent ? m_pParent->IsLoadLocalString() : false);
+
 		return (pSubrecord);
 	}
 
@@ -180,16 +196,28 @@ namespace sfwiki {
 
 	CSubrecord* CRecord::CreateSubrecord(const rectype_t Type) {
 		CSubrecord*	pSubrecord;
-			
-			//TODO
-		if (Type == NAME_XXXX)
-			pSubrecord = new CDataSubrecord();
-		else
-			pSubrecord = new CSubrecord();
 
+		pSubrecord = FindSubrecCreate(Type)();
 		pSubrecord->Initialize(Type, 0);
 
 		return (pSubrecord);
+	}
+
+
+	SUBREC_CREATEFUNC CRecord::FindSubrecCreate(const rectype_t Type) {
+		const subreccreate_t* pCreate;
+		int			          Index;
+
+			/* Loop through this class followed by all base classes */
+		for (pCreate = GetSubrecCreate(); pCreate != NULL; pCreate = pCreate->pBaseCreate)
+		{
+			for (Index = 0; pCreate->pEntries[Index].CreateMethod != NULL; ++Index) {
+				if (*pCreate->pEntries[Index].pName == Type) return (pCreate->pEntries[Index].CreateMethod);
+			}
+		}
+
+			/* No match found, return default creation method */
+		return (CSubrecord::Create);
 	}
 
 
@@ -264,6 +292,17 @@ namespace sfwiki {
 	}
 
 
+	void CRecord::LoadLocalStrings()
+	{
+		CSubrecord* pSubrecord;
+
+		for (dword i = 0; i < m_Subrecords.size(); ++i)
+		{
+			pSubrecord = m_Subrecords[i];
+			pSubrecord->LoadLocalStrings(m_pParent);
+		}
+
+	}
 
 
 	bool CRecord::ReadSubRecords(CFile& File)

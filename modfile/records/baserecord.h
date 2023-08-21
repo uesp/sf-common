@@ -76,6 +76,8 @@ namespace sfwiki {
 		virtual bool IsGroup(void) const { return (false); }
 		virtual bool IsActive(void) const;
 
+		virtual void LoadLocalStrings() = 0;
+
 		/* Input/output record/group data from file */
 		virtual bool ReadData(CFile& File) = 0;
 		virtual bool Write(CFile& File) = 0;
@@ -95,7 +97,7 @@ namespace sfwiki {
 	CBaseRecord*	CreateRecordGroup(const baseheader_t Header);
 	CRecord*		CreateRecord(const baseheader_t Header);
 	CRecord*		CreateRecord(const rectype_t    Type);
-	CGroup*			CreateGroup(const int Type);
+	CGroup*			CreateGroup(const int GroupType);
 	CGroup*			CreateGroup(const baseheader_t Header);
 
 }

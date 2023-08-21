@@ -3,7 +3,9 @@
 
 #include "groups/typegroup.h"
 #include "records/record.h"
+#include "records/tes4record.h"
 #include "common/errorhandler.h"
+#include "stringfile/StringFile.h"
 #include <unordered_map>
 
 namespace sfwiki {
@@ -21,6 +23,7 @@ namespace sfwiki {
 		rectype_t RecordType;
 		size_t TotalSize;
 		size_t TotalCount;
+		size_t LocalCount;
 		size_t MinSize;
 		size_t MaxSize;
 		size_t MinCount;
@@ -53,7 +56,14 @@ namespace sfwiki {
 
 		CBaseRecordVector	m_Records;  		/* Collection of groups and records */
 
-		CRecord*			m_pHeader;			/* Reference to the file header */
+		CTes4Record*		m_pHeader;			/* Reference to the file header */
+
+		CStringFile			 m_ILStringFile;
+		CStringFile			 m_DLStringFile;
+		CStringFile			 m_LStringFile;
+
+		CStringFileMap		 m_StringMap;
+
 
 		std::unordered_map<rectype_t, esprecstat_t> m_RecordStats;
 
@@ -68,6 +78,13 @@ namespace sfwiki {
 		/* Find a position to insert a top level group at */
 		CBaseRecord* FindTopGroupInsertPos(const rectype_t Type);
 
+		virtual void MakeStringMap();
+		virtual void MakeStringMap(CStringFile& StringFile);
+
+		virtual bool LoadStringFiles();
+		virtual bool LoadStringFile(CStringFile& StringFile, const string Filename);
+		virtual void LoadLocalStrings();
+
 		/* Input/output helper methods */
 		virtual bool Read();
 		virtual bool Write();
@@ -75,6 +92,7 @@ namespace sfwiki {
 		bool CollectGroupStats(CGroup* pGroup);
 		bool CollectRecordStats(CRecord* pRecord);
 		bool CollectSubrecordStats(esprecstat_t& Stats, CSubrecord* pSubrecord);
+		string CreateSubrecStatFlags(const esprecstat_t recordStats, const espsubrecstat_t stats);
 		
 
 		/*---------- Begin Public Class Methods -----------------------*/
@@ -112,6 +130,9 @@ namespace sfwiki {
 		byte				GetModIndex(void) { return (m_ModIndex); }
 		//const char*       GetModAuthor(void) { return m_pHeader ? m_pHeader->GetAuthor() : ""; }
 		//const char*		GetModDescription(void) { return m_pHeader ? m_pHeader->GetSummary() : ""; }
+
+		bool IsLocalStrings(void) const { return m_pHeader == NULL ? false : m_pHeader->IsLocalStrings(); }
+		virtual bool IsLoadLocalString(void) const { return IsLocalStrings(); }
 
 		/* Initialize a new file */
 		void InitializeNew(void);

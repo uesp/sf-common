@@ -8,6 +8,7 @@
 namespace sfwiki {
 
 	class CDataSubrecord : public CSubrecord {
+		DECLARE_ALLOCATOR(CDataSubrecord, CSubrecord)
 
 		/*---------- Begin Protected Class Members --------------------*/
 	protected:
@@ -36,7 +37,7 @@ namespace sfwiki {
 		/* Copy the content from an existing subrecord */
 		virtual bool Copy(CSubrecord* pSubrecord);
 
-		virtual CSubrecord* CreateV(void) { return new CDataSubrecord; }
+		//virtual CSubrecord* CreateV(void) { return new CDataSubrecord; }
 
 		/* Get class members */
 		virtual byte*	GetData(void) { return (m_pData); }

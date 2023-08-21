@@ -12,6 +12,8 @@ namespace sfwiki {
 		/* Subrecord header size in bytes */
 	const int SUBRECORD_HEADERSIZE = 6;
 
+	class CEspFile;
+
 
 #pragma pack(push, 1)
 
@@ -24,8 +26,29 @@ namespace sfwiki {
 
 #pragma pack(pop)
 
+	/* Pointer to a class method to create a sub-record object */
+	class CSubrecord;
+	typedef CSubrecord* (*SUBREC_CREATEFUNC) (void);
+
+	/* Structure to hold information on subrecord creation */
+	struct subrecentries_t
+	{
+		const rectype_t*	pName;
+		SUBREC_CREATEFUNC	CreateMethod;
+	};
+
+	struct subreccreate_t
+	{
+		const subreccreate_t*  pBaseCreate;
+		const subrecentries_t* pEntries;
+	};
+
+	/* Shortcut comparison operators */
+	inline bool operator== (const subrecentries_t& Rec, const rectype_t& Type) { return (Rec.pName != NULL && *Rec.pName == Type); }
+
 
 	class CSubrecord {
+		DECLARE_ALLOCATOR(CSubrecord, CSubrecord)
 
 		/*---------- Begin Protected Class Members --------------------*/
 	protected:
@@ -89,6 +112,9 @@ namespace sfwiki {
 		/* Initialize a new record */
 		virtual void InitializeNew(void) { }
 		void InitializeNew(const rectype_t Type, const dword Size) { m_RecordType = Type; m_RecordSize = Size; InitializeNew(); }
+
+		virtual void LoadLocalStrings(CEspFile* pEspFile) { }
+		virtual void SetLoadLocalString(const bool LoadLocal) { }
 
 		/* Input/Output the subrecord to a file */
 		virtual bool Read(CFile& File);

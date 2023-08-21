@@ -107,6 +107,7 @@ namespace sfwiki {
 	char_t*       TerminatePath(char_t* pPath);
 	const char_t* TerminatePath(string& Path);
 	bool          FileExists(const char_t* pFilename);
+	inline bool   FileExists(const string Filename) { return FileExists(Filename.c_str()); }
 
 	int64 GetFileSize(const char_t* pFilename);
 	bool  GetFileSize(int64& FileSize, const char_t* pFilename);
