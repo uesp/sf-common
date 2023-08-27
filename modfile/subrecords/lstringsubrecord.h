@@ -62,6 +62,7 @@ namespace sfwiki {
 
 		/* Get class members */
 		string&         GetString(void) { return (m_String); }
+		const char_t*   GetCString(void) { return (m_String.c_str()); }
 		lstringid_t     GetStringId(void) { return (m_StringID); }
 		virtual byte*	GetData(void) { return (byte *)(m_String.c_str()); }
 

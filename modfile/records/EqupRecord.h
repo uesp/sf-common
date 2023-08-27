@@ -3,6 +3,7 @@
 
 
 #include "idrecord.h"
+#include "../subrecords/dwordsubrecord.h"
 
 
 namespace sfwiki {
@@ -14,8 +15,6 @@ namespace sfwiki {
 
 		/*---------- Begin Protected Class Members --------------------*/
 	protected:
-		//CSrSubrecord*		m_pDataData;
-		//CSrSubrecord*		m_pPnamData;
 
 
 		/*---------- Begin Protected Class Methods --------------------*/

@@ -2,7 +2,6 @@
 #define __SFWIKI_IDRECORD_H
 
 #include "record.h"
-#include "../subrecords/stringsubrecord.h"
 #include "../subrecords/boundssubrecord.h"
 
 

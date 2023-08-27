@@ -3,7 +3,8 @@
 
 
 #include "item2record.h"
-//#include "../subrecords/srweapdatasubrecord.h"
+#include "../subrecords/wgensubrecord.h"
+#include "../subrecords/wam2subrecord.h"
 //#include "../subrecords/srcrdtsubrecord.h"
 //#include "../subrecords/srweapdnamsubrecord.h"
 //#include "../subrecords/srvmadsubrecord.h"

@@ -17,7 +17,7 @@ namespace sfwiki {
 	template<typename ... Args>
 	string FormatString(const std::string& format, Args ... args)
 	{
-		int size_s = std::snprintf(nullptr, 0, format.c_str(), args ...) + 8; // Extra space for '\0'
+		int size_s = std::snprintf(nullptr, 0, format.c_str(), args ...) + 1; // Extra space for '\0'
 		if (size_s <= 0) { throw std::runtime_error("Error during formatting."); }
 		auto size = static_cast<size_t>(size_s);
 		std::unique_ptr<char[]> buf(new char[size]);
@@ -58,6 +58,10 @@ namespace sfwiki {
 
 	string& tolower(string& String);
 	string& toupper(string& String);
+
+	string CreateBitString(const byte Value);
+	string CreateBitString(const word Value);
+	string CreateBitString(const dword Value);
 
 	inline string& TerminatePathString(string& PathBuffer) 
 	{

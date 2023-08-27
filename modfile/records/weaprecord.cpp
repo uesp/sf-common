@@ -12,6 +12,9 @@ namespace sfwiki {
 		DEFINE_SUBRECCREATE(NAME_DESC, CLStringSubrecord::Create)
 		DEFINE_SUBRECCREATE(NAME_FULL, CLStringSubrecord::Create)
 		DEFINE_SUBRECCREATE(NAME_ETYP, CFormidSubrecord::Create)
+		DEFINE_SUBRECCREATE(NAME_WGEN, CWgenSubrecord::Create)
+		DEFINE_SUBRECCREATE(NAME_WAM2, CWam2Subrecord::Create)
+		DEFINE_SUBRECCREATE(NAME_MODL, CStringSubrecord::Create)
 
 		//DEFINE_SRSUBRECCREATE(SR_NAME_DATA, CSrWeapDataSubrecord::Create)
 		//DEFINE_SRSUBRECCREATE(SR_NAME_VNAM, CSrDwordSubrecord::Create)

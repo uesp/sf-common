@@ -4,8 +4,7 @@ namespace sfwiki {
 
 
 	BEGIN_SUBRECCREATE(CEqupRecord, CIdRecord)
-		//DEFINE_SRSUBRECCREATE(SR_NAME_DATA, CSrDataSubrecord::Create)
-		//DEFINE_SRSUBRECCREATE(SR_NAME_PNAM, CSrDataSubrecord::Create)
+		DEFINE_SUBRECCREATE(NAME_DATA, CDwordSubrecord::Create)
 	END_SUBRECCREATE()
 
 

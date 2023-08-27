@@ -186,7 +186,7 @@ namespace sfwiki {
 	
 
 	CSubrecord* CRecord::CreateSubrecord(const subrecheader_t Header) {
-		CSubrecord*	pSubrecord = CreateSubrecord(Header.Type);
+		CSubrecord*	pSubrecord = CreateSubrecord(Header.Type, Header.Size);
 
 		pSubrecord->Initialize(Header);
 
@@ -194,25 +194,31 @@ namespace sfwiki {
 	}
 
 
-	CSubrecord* CRecord::CreateSubrecord(const rectype_t Type) {
+	CSubrecord* CRecord::CreateSubrecord(const rectype_t Type, const dword Size) {
 		CSubrecord*	pSubrecord;
 
-		pSubrecord = FindSubrecCreate(Type)();
+		pSubrecord = FindSubrecCreate(Type, Size)();
 		pSubrecord->Initialize(Type, 0);
 
 		return (pSubrecord);
 	}
 
 
-	SUBREC_CREATEFUNC CRecord::FindSubrecCreate(const rectype_t Type) {
+	SUBREC_CREATEFUNC CRecord::FindSubrecCreate(const rectype_t Type, const dword Size) {
 		const subreccreate_t* pCreate;
 		int			          Index;
 
 			/* Loop through this class followed by all base classes */
-		for (pCreate = GetSubrecCreate(); pCreate != NULL; pCreate = pCreate->pBaseCreate)
+		for (pCreate = GetSubrecCreate(); pCreate != nullptr; pCreate = pCreate->pBaseCreate)
 		{
-			for (Index = 0; pCreate->pEntries[Index].CreateMethod != NULL; ++Index) {
-				if (*pCreate->pEntries[Index].pName == Type) return (pCreate->pEntries[Index].CreateMethod);
+			for (Index = 0; pCreate->pEntries[Index].CreateMethod != nullptr; ++Index) {
+				if (*pCreate->pEntries[Index].pName == Type)
+				{
+					if (*pCreate->pEntries[Index].CheckMethod == nullptr) return (pCreate->pEntries[Index].CreateMethod);
+					CSubrecord* pPrevSubrecord = nullptr;
+					if (m_Subrecords.size() > 0) pPrevSubrecord = m_Subrecords[m_Subrecords.size() - 1];
+					if ((*pCreate->pEntries[Index].CheckMethod)(Type, Size, pPrevSubrecord)) return (pCreate->pEntries[Index].CreateMethod);
+				}
 			}
 		}
 

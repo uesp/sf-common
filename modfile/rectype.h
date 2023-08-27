@@ -78,6 +78,7 @@ namespace sfwiki {
 	extern const rectype_t NAME_ASPC;
 	extern const rectype_t NAME_ASTP;
 	extern const rectype_t NAME_AVIF;
+	extern const rectype_t NAME_BIOM;
 	extern const rectype_t NAME_BOOK;
 	extern const rectype_t NAME_BPTD;
 	extern const rectype_t NAME_CAMS;
@@ -174,6 +175,8 @@ namespace sfwiki {
 	extern const rectype_t NAME_SPEL;
 	extern const rectype_t NAME_SPGD;
 	extern const rectype_t NAME_STAT;
+	extern const rectype_t NAME_STDT;
+	extern const rectype_t NAME_SUNP;
 	extern const rectype_t NAME_TACT;
 	extern const rectype_t NAME_TES4;
 	extern const rectype_t NAME_TREE;
@@ -231,9 +234,11 @@ namespace sfwiki {
 	extern const rectype_t NAME_ATKE;
 	extern const rectype_t NAME_ATKR;
 	extern const rectype_t NAME_ATXT;
+	extern const rectype_t NAME_AVFL;
 	extern const rectype_t NAME_AVSK;
 	extern const rectype_t NAME_B0TX;
 	extern const rectype_t NAME_BAMT;
+	extern const rectype_t NAME_BFCB;
 	extern const rectype_t NAME_BIAD;
 	extern const rectype_t NAME_BIDS;
 	extern const rectype_t NAME_BNAM;
@@ -521,8 +526,10 @@ namespace sfwiki {
 	extern const rectype_t NAME_VTCK;
 	extern const rectype_t NAME_VTXT;
 	extern const rectype_t NAME_WAIT;
+	extern const rectype_t NAME_WAM2;
 	extern const rectype_t NAME_WBDT;
 	extern const rectype_t NAME_WCTR;
+	extern const rectype_t NAME_WGEN;
 	extern const rectype_t NAME_WKMV;
 	extern const rectype_t NAME_WLST;
 	extern const rectype_t NAME_WNAM;

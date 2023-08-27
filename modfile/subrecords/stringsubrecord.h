@@ -50,6 +50,7 @@ namespace sfwiki {
 
 		/* Get class members */
 		string&			GetString(void) { return (m_String); }
+		const char_t*	GetCString(void) { return (m_String.c_str()); }
 		virtual byte*	GetData(void) { return (byte *)(m_String.c_str()); }
 		virtual dword	GetRecordSize(void) const { return ((dword)m_String.length() + 1); }
 

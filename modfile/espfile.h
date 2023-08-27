@@ -64,6 +64,7 @@ namespace sfwiki {
 
 		CStringFileMap		 m_StringMap;
 
+		std::unordered_map<formid_t, CBaseRecord*> m_FormidMap;
 
 		std::unordered_map<rectype_t, esprecstat_t> m_RecordStats;
 
@@ -74,6 +75,9 @@ namespace sfwiki {
 		/* Create a top level group record */
 		bool        CreateTopLevelGroup(CBaseRecord* pNewRecord);
 		CTypeGroup* CreateTopLevelGroup(const rectype_t Type);
+
+		void CreateFormidMap(CGroup* pGroup);
+		void CreateFormidMap();
 
 		/* Find a position to insert a top level group at */
 		CBaseRecord* FindTopGroupInsertPos(const rectype_t Type);

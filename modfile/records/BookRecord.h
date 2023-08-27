@@ -3,7 +3,7 @@
 
 #include "item1record.h"
 #include "../subrecords/lstringsubrecord.h"
-//#include "../subrecords/srbookdatasubrecord.h"
+#include "../subrecords/bookdatasubrecord.h"
 //#include "../subrecords/srvmadsubrecord.h"
 
 

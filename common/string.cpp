@@ -115,7 +115,7 @@ namespace sfwiki {
 			++Index;
 		}
 
-		/* Return pointer to the first non-whitespace TCHAR */
+		/* Return pointer to the first non-whitespace character */
 		if (Index > 0) String.erase(String.begin() + Index - 1);
 		return String;
 	}
@@ -132,7 +132,7 @@ namespace sfwiki {
 
 			/* Terminate string and return if non-whitespace found */
 			if (!isspace(String[Index])) {
-				String.resize(String.size() - Index + 1);
+				String.resize(Index + 1);
 				return String;
 			}
 		}
@@ -247,6 +247,59 @@ namespace sfwiki {
 	{
 		std::transform(String.begin(), String.end(), String.begin(), [](unsigned char c) { return std::toupper(c); });
 		return String;
+	}
+
+	string CreateBitString(const byte Value)
+	{
+		string Buffer;
+
+		Buffer.reserve(10);
+
+		for (int i = 7; i >= 0; --i)
+		{
+			if ((1 << i) & Value)
+				Buffer += "1";
+			else
+				Buffer += "0";
+		}
+
+		return Buffer;
+	}
+
+
+	string CreateBitString(const word Value)
+	{
+		string Buffer;
+
+		Buffer.reserve(18);
+
+		for (int i = 15; i >= 0; --i)
+		{
+			if ((1 << i) & Value)
+				Buffer += "1";
+			else
+				Buffer += "0";
+		}
+
+		return Buffer;
+	}
+
+
+	string CreateBitString(const dword Value)
+	{
+		string Buffer;
+
+		Buffer.reserve(34);
+
+		for (int i = 31; i >= 0; --i)
+		{
+			if ((1 << i) & Value)
+				Buffer += "1";
+			else
+				Buffer += "0";
+		}
+
+		return Buffer;
 	}
 	
 	/*

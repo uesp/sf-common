@@ -8,14 +8,12 @@
 #include "baserecord.h"
 
 #include "../subrecords/lstringsubrecord.h"
+#include "../subrecords/stringsubrecord.h"
 #include "../subrecords/formidsubrecord.h"
-  //#include "../subrecords/srdwordsubrecord.h"
-  //#include "../subrecords/srlongsubrecord.h"
-  //#include "../subrecords/srwordsubrecord.h"
-  //#include "../subrecords/srformidsubrecord.h"
+#include "../subrecords/floatsubrecord.h"
+#include "../subrecords/dwordsubrecord.h"
+#include "../subrecords/bytesubrecord.h"
   //#include "../subrecords/srsubreccont.h"
-  //#include "../subrecords/srstringsubrecord.h"
-  //#include "../subrecords/srfloatsubrecord.h"
   //#include "srrecordfield.h"
   //#include "../srrectypeinfo.h"
 
@@ -58,9 +56,10 @@ namespace sfwiki {
 	const subreccreate_t   Class::s_SubrecCreate = { &BaseClass::s_SubrecCreate, Class::s_SubrecEntries }; \
 	const subrecentries_t  Class::s_SubrecEntries[] = {
 
-  #define DEFINE_SUBRECCREATE(Name, Method) { &Name, Method }, 
+  #define DEFINE_SUBRECCREATE(Name, Method) { &Name, Method, NULL }, 
+  #define DEFINE_SUBRECCREATE2(Name, Method, Check) { &Name, Method, Check }, 
 
-  #define END_SUBRECCREATE() { NULL, NULL } }; 
+  #define END_SUBRECCREATE() { NULL, NULL, NULL } }; 
 
 
 #pragma pack(push, 1)
@@ -120,11 +119,11 @@ namespace sfwiki {
 		bool ReadSubRecords(CFile& File);
 		bool ReadCompressedData(CFile& File);
 		bool WriteSubRecords(CFile& File);
-		bool WriteCompressedData(CFile& File);
+		//bool WriteCompressedData(CFile& File);
 		bool WriteRecordSize(CFile& File, const int Offset);
 		//bool WriteDeflate(CFile& File, CMemFile& RecordData);
 
-		SUBREC_CREATEFUNC FindSubrecCreate(const rectype_t Type);
+		SUBREC_CREATEFUNC FindSubrecCreate(const rectype_t Type, const dword Size);
 
 
 		/*---------- Begin Public Class Methods -----------------------*/
@@ -144,7 +143,7 @@ namespace sfwiki {
 		CSubrecord* AddInitNewSubrecord(const rectype_t  Type);
 		CSubrecord* AddNewSubrecord(const subrecheader_t Header);
 		CSubrecord* CreateSubrecord(const subrecheader_t Header);
-		CSubrecord* CreateSubrecord(const rectype_t      Type);
+		CSubrecord* CreateSubrecord(const rectype_t      Type, const dword Size);
 
 		/* Count the number of subrecords of the given type */
 		virtual int CountSubrecords(const rectype_t Type);
@@ -162,10 +161,30 @@ namespace sfwiki {
 		//CBaseRecord* FindFormID(const formid_t FormID) { return (m_Header.FormID == FormID ? this : nullptr); }
 		int FindSubrecord(const rectype_t Type, const int StartIndex = 0);
 
-		template <typename T> T* FindSubrecord(const rectype_t Type, const int StartIndex = 0) {
-			int i = FindSubrecord(Type, StartIndex);
-			if (i < 0) return nullptr;
-			return dynamic_cast<T*>(m_Subrecords[i]);
+		template <typename T> T* FindSubrecord(const rectype_t Type, int StartIndex = 0) {
+			T* pResult = nullptr;
+
+			do {
+				int i = FindSubrecord(Type, StartIndex);
+				if (i < 0) return nullptr;
+				pResult = dynamic_cast<T*>(m_Subrecords[i]);
+				StartIndex = i + 1;
+			} while (pResult == nullptr);
+
+			return pResult;
+		}
+
+		template <typename T> std::vector<T*> FindAllSubrecords(const rectype_t Type, const int StartIndex = 0) {
+			std::vector<T*> result;
+
+			for (auto i : m_Subrecords)
+			{
+				if (i->GetRecordType() != Type) continue;
+				T* pT = dynamic_cast<T*>(i);
+				if (pT != nullptr) result.push_back(pT);
+			}
+
+			return result;
 		}
 
 		/* Computes the size in bytes needed to output all sub-records */

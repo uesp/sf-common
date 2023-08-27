@@ -32,6 +32,7 @@ namespace sfwiki {
 	const rectype_t NAME_ASTP = "ASTP";
 	const rectype_t NAME_AVIF = "AVIF";
 	const rectype_t NAME_BOOK = "BOOK";
+	const rectype_t NAME_BIOM = "BIOM";
 	const rectype_t NAME_BPTD = "BPTD";
 	const rectype_t NAME_CAMS = "CAMS";
 	const rectype_t NAME_CELL = "CELL";
@@ -127,6 +128,8 @@ namespace sfwiki {
 	const rectype_t NAME_SPEL = "SPEL";
 	const rectype_t NAME_SPGD = "SPGD";
 	const rectype_t NAME_STAT = "STAT";
+	const rectype_t NAME_STDT = "STDT";
+	const rectype_t NAME_SUNP = "SUNP";
 	const rectype_t NAME_TACT = "TACT";
 	const rectype_t NAME_TES4 = "TES4";
 	const rectype_t NAME_TREE = "TREE";
@@ -191,9 +194,11 @@ namespace sfwiki {
 	const rectype_t NAME_ATKE = "ATKE";
 	const rectype_t NAME_ATKR = "ATKR";
 	const rectype_t NAME_ATXT = "ATXT";
+	const rectype_t NAME_AVFL = "AVFL";
 	const rectype_t NAME_AVSK = "AVSK";
 	const rectype_t NAME_B0TX = "B0TX";
 	const rectype_t NAME_BAMT = "BAMT";
+	const rectype_t NAME_BFCB = "BFCB";
 	const rectype_t NAME_BIAD = "BIAD";
 	const rectype_t NAME_BIDS = "BIDS";
 	const rectype_t NAME_BNAM = "BNAM";
@@ -481,8 +486,10 @@ namespace sfwiki {
 	const rectype_t NAME_VTCK = "VTCK";
 	const rectype_t NAME_VTXT = "VTXT";
 	const rectype_t NAME_WAIT = "WAIT";
+	const rectype_t NAME_WAM2 = "WAM2";
 	const rectype_t NAME_WBDT = "WBDT";
 	const rectype_t NAME_WCTR = "WCTR";
+	const rectype_t NAME_WGEN = "WGEN";
 	const rectype_t NAME_WKMV = "WKMV";
 	const rectype_t NAME_WLST = "WLST";
 	const rectype_t NAME_WNAM = "WNAM";

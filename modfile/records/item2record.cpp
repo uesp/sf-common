@@ -6,6 +6,9 @@ namespace sfwiki {
 	BEGIN_SUBRECCREATE(CItem2Record, CItem1Record)
 		//DEFINE_SUBRECCREATE(NAME_EITM, CFormidSubrecord::Create)
 		//DEFINE_SRSUBRECCREATE(SR_NAME_EAMT, CSrWordSubrecord::Create)
+		//DEFINE_SUBRECCREATE(NAME_MODL, CLStringSubrecord::Create)
+		DEFINE_SUBRECCREATE(NAME_FULL, CLStringSubrecord::Create)
+		DEFINE_SUBRECCREATE(NAME_ONAM, CLStringSubrecord::Create)
 	END_SUBRECCREATE()
 
 

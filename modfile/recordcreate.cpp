@@ -1,17 +1,58 @@
 #include "groups/typegroup.h"
 #include "records/record.h"
-#include "records/tes4record.h"
+
+#include "records/alchrecord.h"
+#include "records/ammorecord.h"
+#include "records/armorecord.h"
+#include "records/avifrecord.h"
+#include "records/biomrecord.h"
 #include "records/bookrecord.h"
+#include "records/clasrecord.h"
+#include "records/enchrecord.h"
 #include "records/equprecord.h"
+#include "records/furnrecord.h"
+#include "records/factrecord.h"
+#include "records/gmstrecord.h"
+#include "records/lctnrecord.h"
+#include "records/mgefrecord.h"
+#include "records/miscrecord.h"
+#include "records/npcrecord.h"
+#include "records/racerecord.h"
+#include "records/spelrecord.h"
+#include "records/stdtrecord.h"
+#include "records/tes4record.h"
 #include "records/weaprecord.h"
+#include "records/wrldrecord.h"
+
 
 namespace sfwiki {
 
 	static reccreate_t s_CreateRecords[] = {
+		{ &NAME_ALCH, CAlchRecord::Create },
+		{ &NAME_AMMO, CAmmoRecord::Create },
+		{ &NAME_ARMO, CArmoRecord::Create },
+		{ &NAME_AVIF, CAvifRecord::Create },
 		{ &NAME_BOOK, CBookRecord::Create },
+		{ &NAME_BIOM, CBiomRecord::Create },
+		{ &NAME_CLAS, CClasRecord::Create },
 		{ &NAME_EQUP, CEqupRecord::Create },
+		{ &NAME_ENCH, CEnchRecord::Create },
+		{ &NAME_FACT, CFactRecord::Create },
+		{ &NAME_FURN, CFurnRecord::Create },
+		{ &NAME_GMST, CGmstRecord::Create },
+		{ &NAME_LCTN, CLctnRecord::Create },
+		{ &NAME_MGEF, CMgefRecord::Create },
+		{ &NAME_MISC, CMiscRecord::Create },
+		{ &NAME_NPC_, CNpcRecord::Create  },
+		{ &NAME_RACE, CRaceRecord::Create },
+		{ &NAME_SPEL, CSpelRecord::Create },
+		{ &NAME_STDT, CStdtRecord::Create },
 		{ &NAME_TES4, CTes4Record::Create },
 		{ &NAME_WEAP, CWeapRecord::Create },
+		{ &NAME_WRLD, CWrldRecord::Create },
+
+		{ &NAME_LVLI, CIdRecord::Create },
+		{ &NAME_SUNP, CIdRecord::Create },
 		{ NULL,		 NULL }	/* Must be last */
 	};
 

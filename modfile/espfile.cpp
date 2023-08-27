@@ -1,6 +1,8 @@
 #include "espfile.h"
 #include "common/utils.h"
 #include <algorithm>
+#include "common/time.h"
+
 
 namespace sfwiki {
 	
@@ -69,6 +71,43 @@ namespace sfwiki {
 		}
 
 		return (true);
+	}
+
+
+	void CEspFile::CreateFormidMap(CGroup* pGroup)
+	{
+		if (pGroup == nullptr) return;
+
+		for (auto i : pGroup->GetRecords())
+		{
+			if (i->IsGroup())
+			{
+				CreateFormidMap(dynamic_cast<CGroup *>(i));
+			}
+			else
+			{
+				m_FormidMap[i->GetFormID()] = i;
+			}
+		}
+	}
+
+
+	void CEspFile::CreateFormidMap()
+	{
+		m_FormidMap.clear();
+		m_FormidMap.rehash(100000);
+
+		for (auto i : m_Records)
+		{
+			if (i->IsGroup())
+			{
+				CreateFormidMap(dynamic_cast<CGroup *>(i));
+			}
+			else
+			{
+				m_FormidMap[i->GetFormID()] = i;
+			}
+		}
 	}
 	
 
@@ -151,25 +190,8 @@ namespace sfwiki {
 
 	CBaseRecord* CEspFile::FindFormId(const formid_t FormID)
 	{
-		for (auto i : m_Records)
-		{
-			if (i->IsGroup())
-			{
-				auto pGroup = dynamic_cast<CGroup *>(i);
-
-				if (pGroup)
-				{
-					auto pRecord = pGroup->FindFormId(FormID);
-					if (pRecord) return pRecord;
-				}
-			}
-			else if (i->GetFormID() == FormID)
-			{
-				return i;
-			}
-		}
-
-		return nullptr;
+		if (m_FormidMap.count(FormID) == 0) return nullptr;
+		return m_FormidMap[FormID];
 	}
 
 
@@ -212,7 +234,10 @@ namespace sfwiki {
 	
 
 	bool CEspFile::Load(const char_t* pFilename) {
-		bool      Result;
+		bool    Result;
+		timer_t	Timer;
+
+		StartTimer(Timer);
 
 		/* Clear the current object contents */
 		Destroy();
@@ -241,7 +266,11 @@ namespace sfwiki {
 			LoadLocalStrings();
 		}
 
+		CreateFormidMap();
+
 		CRecord::DestroyIOBuffers();
+
+		EndTimer(Timer, "CEspFile::Load");
 
 		return (Result);
 	}
@@ -546,13 +575,13 @@ namespace sfwiki {
 			float AverageSize = (float) stats.TotalSize / (float) stats.TotalCount;
 
 			File.Printf("== %4.4s Record Info ==\n", stats.RecordType.Name);
-			File.Printf("TotalSize   = %I64u\n", stats.TotalSize);
-			File.Printf("TotalCount  = %I64u\n", stats.TotalCount);
-			File.Printf("AverageSize = %0.2f bytes\n", AverageSize);
-			File.Printf("MinSize     = %I64u bytes\n", stats.MinSize);
-			File.Printf("MaxSize     = %I64u bytes\n", stats.MaxSize);
-			File.Printf("MinVersion  = %I64u\n", stats.MinVersion);
-			File.Printf("MaxVersion  = %I64u\n", stats.MaxVersion);
+			File.Printf("     TotalSize   = %I64u\n", stats.TotalSize);
+			File.Printf("     TotalCount  = %I64u\n", stats.TotalCount);
+			File.Printf("     AverageSize = %0.2f bytes\n", AverageSize);
+			File.Printf("     MinSize     = %I64u bytes\n", stats.MinSize);
+			File.Printf("     MaxSize     = %I64u bytes\n", stats.MaxSize);
+			File.Printf("     MinVersion  = %I64u\n", stats.MinVersion);
+			File.Printf("     MaxVersion  = %I64u\n", stats.MaxVersion);
 
 			int subIndex = 1;
 
@@ -573,13 +602,13 @@ namespace sfwiki {
 				AverageSize = (float)substats.TotalSize / (float)substats.TotalCount;
 				string flags = CreateSubrecStatFlags(stats, substats);
 
-				File.Printf("%d) %4.4s Subrecord Info: %s\n", subIndex, substats.RecordType.Name, flags.c_str());
-				File.Printf("\tTotal Count = %I64u\n", substats.TotalCount);
-				File.Printf("\tAverageSize = %0.2f bytes\n", AverageSize);
-				File.Printf("\tMinSize     = %I64u bytes\n", substats.MinSize);
-				File.Printf("\tMaxSize     = %I64u bytes\n", substats.MaxSize);
-				File.Printf("\tMinCount    = %I64u\n", substats.MinCount);
-				File.Printf("\tMaxCount    = %I64u\n", substats.MaxCount);
+				File.Printf("     %d) %4.4s Subrecord Info: %s\n", subIndex, substats.RecordType.Name, flags.c_str());
+				File.Printf("          Total Count = %I64u\n", substats.TotalCount);
+				File.Printf("          AverageSize = %0.2f bytes\n", AverageSize);
+				File.Printf("          MinSize     = %I64u bytes\n", substats.MinSize);
+				File.Printf("          MaxSize     = %I64u bytes\n", substats.MaxSize);
+				File.Printf("          MinCount    = %I64u\n", substats.MinCount);
+				File.Printf("          MaxCount    = %I64u\n", substats.MaxCount);
 
 				++subIndex;
 			}
@@ -602,18 +631,18 @@ namespace sfwiki {
 					auto pTypeGroup = dynamic_cast<CTypeGroup *>(pGroup);
 
 					if (pTypeGroup)
-						File.Printf("\t%4.4s (Group)\n", pTypeGroup->GetContainsType().Name);
+						File.Printf("     %4.4s (Group)\n", pTypeGroup->GetContainsType().Name);
 					else
-						File.Printf("\t%4.4s (Unknown Group)\n", pRecord->GetRecordType().Name);
+						File.Printf("     %4.4s (Unknown Group)\n", pRecord->GetRecordType().Name);
 				}
 				else
 				{
-					File.Printf("\t%4.4s (Unknown)\n", pRecord->GetRecordType().Name);
+					File.Printf("     %4.4s (Unknown)\n", pRecord->GetRecordType().Name);
 				}
 			}
 			else
 			{
-				File.Printf("\t%4.4s (Record)\n", pRecord->GetRecordType().Name);
+				File.Printf("     %4.4s (Record)\n", pRecord->GetRecordType().Name);
 			}
 		}
 

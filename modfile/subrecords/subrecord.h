@@ -16,10 +16,10 @@ namespace sfwiki {
 #ifdef _DEBUG
 
 #define VERIFY_SUBRECORDSIZE(REQSIZE) if (m_RecordSize != REQSIZE) { \
-						return AddSrUserError(ERR_USER_BADINPUT, "0x%08X: Bad subrecord size for %4.4s! Expected %d but found %d bytes!", File.Tell(), m_RecordType.Name, REQSIZE, m_RecordSize); }
+						return AddUserError(ERR_USER_BADINPUT, "0x%08X: Bad subrecord size for %4.4s! Expected %d but found %d bytes!", File.Tell(), m_RecordType.Name, REQSIZE, m_RecordSize); }
 
 #define VERIFY_SUBRECORDSIZE_MAX(REQSIZE) if (m_RecordSize > REQSIZE) { \
-						return AddSrUserError(ERR_USER_BADINPUT, "0x%08X: Bad subrecord size for %4.4s! Expected %d or less but found %d bytes!", File.Tell(), m_RecordType.Name, REQSIZE, m_RecordSize); } \
+						return AddUserError(ERR_USER_BADINPUT, "0x%08X: Bad subrecord size for %4.4s! Expected %d or less but found %d bytes!", File.Tell(), m_RecordType.Name, REQSIZE, m_RecordSize); } \
 						else if (m_RecordSize != REQSIZE) { \
 							SystemLog.Printf("0x%08X: Warning: Bad subrecord size for %4.4s! Expected %d but found %d bytes!", File.Tell(), m_RecordType.Name, REQSIZE, m_RecordSize); }
 
@@ -50,12 +50,14 @@ namespace sfwiki {
 	/* Pointer to a class method to create a sub-record object */
 	class CSubrecord;
 	typedef CSubrecord* (*SUBREC_CREATEFUNC) (void);
+	typedef bool (*SUBREC_CREATE_CHECKFUNC) (const rectype_t Type, const dword Size, CSubrecord* pPrevSubrecord);
 
 	/* Structure to hold information on subrecord creation */
 	struct subrecentries_t
 	{
-		const rectype_t*	pName;
-		SUBREC_CREATEFUNC	CreateMethod;
+		const rectype_t*		pName;
+		SUBREC_CREATEFUNC		CreateMethod;
+		SUBREC_CREATE_CHECKFUNC	CheckMethod;
 	};
 
 	struct subreccreate_t
@@ -127,7 +129,7 @@ namespace sfwiki {
 
 		/* Get class members */
 		rectype_t		GetRecordType(void) { return (m_RecordType); }
-		virtual dword	GetRecordSize(void) const { return (m_RecordSize); }
+		virtual dword	GetRecordSize(void) { return (m_RecordSize); }
 		virtual byte*	GetData(void) { return (nullptr); }
 
 		/* Initialize a new record */

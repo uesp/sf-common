@@ -15,7 +15,6 @@ namespace sfwiki {
 	#define _W64
 #endif
 
-
 		/* Standard unsigned types */
 	typedef uint8_t   byte;		/* 8 bits */
 	typedef uint16_t  word;		/* 16 bits */
