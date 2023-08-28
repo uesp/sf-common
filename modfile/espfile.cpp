@@ -233,7 +233,7 @@ namespace sfwiki {
 	}
 	
 
-	bool CEspFile::Load(const char_t* pFilename) {
+	bool CEspFile::Load(const string Filename) {
 		bool    Result;
 		timer_t	Timer;
 
@@ -241,7 +241,7 @@ namespace sfwiki {
 
 		/* Clear the current object contents */
 		Destroy();
-		SetFilename(pFilename);
+		SetFilename(Filename.c_str());
 
 		Result = CRecord::InitIOBuffers();
 		if (!Result) return (false);
@@ -249,7 +249,7 @@ namespace sfwiki {
 		Result = LoadStringFiles();
 		MakeStringMap();
 
-		Result = m_File.Open(pFilename, "rb");
+		Result = m_File.Open(Filename, "rb");
 		if (!Result) return (false);
 
 		Result = Read();
@@ -258,7 +258,7 @@ namespace sfwiki {
 		auto lastPos = m_File.Tell64();
 		auto diffSize = fileSize - lastPos;
 
-		SystemLog.Printf("End read position for file '%s' is 0x%08X (0x%08X bytes left over).", pFilename, (int) lastPos, (int) diffSize);
+		SystemLog.Printf("End read position for file '%s' is 0x%08X (0x%08X bytes left over).", Filename.c_str(), (int) lastPos, (int) diffSize);
 		m_File.Close();
 
 		if (IsLocalStrings())
@@ -390,16 +390,16 @@ namespace sfwiki {
 	}
 	
 
-	bool CEspFile::Save(const char_t* pFilename)
+	bool CEspFile::Save(const string Filename)
 	{
 		bool      Result;
 
 		Result = CRecord::InitIOBuffers();
 		if (!Result) return (false);
 
-		SetFilename(pFilename);
+		SetFilename(Filename.c_str());
 
-		Result = m_File.Open(pFilename, "wb");
+		Result = m_File.Open(Filename, "wb");
 		if (!Result) return (false);
 
 		Result = Write();
@@ -408,6 +408,36 @@ namespace sfwiki {
 		CRecord::DestroyIOBuffers();
 
 		return (Result);
+	}
+
+
+	bool CEspFile::SaveRaw(const string Filename, const rectype_t RecType)
+	{
+		bool Result = m_File.Open(Filename, "wb");
+		if (!Result) return false;
+
+		auto pGroup = GetTypeGroup(RecType);
+		if (pGroup == nullptr) return false;
+
+		Result = CRecord::InitIOBuffers();
+		if (!Result) return false;
+
+		for (auto i : pGroup->GetRecords())
+		{
+			auto pRecord = dynamic_cast<CRecord *>(i);
+			if (pRecord == nullptr) continue;
+			
+			auto isCompressed = pRecord->IsCompressed();
+			if (isCompressed) pRecord->SetCompressed(false);
+
+			Result = i->Write(m_File);
+
+			if (isCompressed) pRecord->SetCompressed(true);
+			if (!Result) break;
+		}
+
+		CRecord::DestroyIOBuffers();
+		return Result;
 	}
 
 

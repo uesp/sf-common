@@ -152,8 +152,9 @@ namespace sfwiki {
 		void InitializeNew(void);
 
 		/* Main input/output methods */
-		virtual bool Load(const char_t* pFilename);
-		virtual bool Save(const char_t* pFilename);
+		virtual bool Load(const string Filename);
+		virtual bool Save(const string Filename);
+		virtual bool SaveRaw(const string Filename, const rectype_t RecType);
 
 		/* Set class members */
 		void SetFilename(const char_t*     pString) { 

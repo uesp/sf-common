@@ -153,6 +153,7 @@ namespace sfwiki {
 	extern const rectype_t NAME_PERK;
 	extern const rectype_t NAME_PGRE;
 	extern const rectype_t NAME_PHZD;
+	extern const rectype_t NAME_PNDT;
 	extern const rectype_t NAME_PROJ;
 	extern const rectype_t NAME_QUST;
 	extern const rectype_t NAME_RACE;
@@ -238,6 +239,7 @@ namespace sfwiki {
 	extern const rectype_t NAME_AVSK;
 	extern const rectype_t NAME_B0TX;
 	extern const rectype_t NAME_BAMT;
+	extern const rectype_t NAME_BDED;
 	extern const rectype_t NAME_BFCB;
 	extern const rectype_t NAME_BIAD;
 	extern const rectype_t NAME_BIDS;
@@ -276,6 +278,7 @@ namespace sfwiki {
 	extern const rectype_t NAME_DALC;
 	extern const rectype_t NAME_DATA;
 	extern const rectype_t NAME_DEMO;
+	extern const rectype_t NAME_DENS;
 	extern const rectype_t NAME_DESC;
 	extern const rectype_t NAME_DEST;
 	extern const rectype_t NAME_DEVA;
@@ -461,6 +464,7 @@ namespace sfwiki {
 	extern const rectype_t NAME_RDOT;
 	extern const rectype_t NAME_RDSA;
 	extern const rectype_t NAME_RDWT;
+	extern const rectype_t NAME_RFDP;
 	extern const rectype_t NAME_RIAD;
 	extern const rectype_t NAME_RNAM;
 	extern const rectype_t NAME_RNMV;
@@ -489,6 +493,7 @@ namespace sfwiki {
 	extern const rectype_t NAME_STOL;
 	extern const rectype_t NAME_SWMV;
 	extern const rectype_t NAME_TCLT;
+	extern const rectype_t NAME_TEMP;
 	extern const rectype_t NAME_TIAD;
 	extern const rectype_t NAME_TIAS;
 	extern const rectype_t NAME_TIFC;

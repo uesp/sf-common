@@ -1,5 +1,5 @@
-#ifndef __SFWIKI_EQUPRECORD_H
-#define __SFWIKI_EQUPRECORD_H
+#ifndef __SFWIKI_SUNPRECORD_H
+#define __SFWIKI_SUNPRECORD_H
 
 
 #include "idrecord.h"
@@ -7,10 +7,10 @@
 
 namespace sfwiki {
 
-	class CEqupRecord : public CIdRecord
+	class CSunpRecord : public CIdRecord
 	{
 		DECLARE_SUBRECCREATE()
-		DECLARE_ALLOCATOR(CEqupRecord, CRecord)
+		DECLARE_ALLOCATOR(CSunpRecord, CRecord)
 
 		/*---------- Begin Protected Class Members --------------------*/
 	protected:
@@ -24,7 +24,7 @@ namespace sfwiki {
 	public:
 
 		/* Class Constructors/Destructors */
-		CEqupRecord();
+		CSunpRecord();
 		virtual void Destroy(void);
 
 		/* Initialize a new record */

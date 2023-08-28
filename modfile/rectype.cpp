@@ -108,6 +108,7 @@ namespace sfwiki {
 	const rectype_t NAME_PHZD = "PHZD";
 	const rectype_t NAME_PROJ = "PROJ";
 	const rectype_t NAME_QUST = "QUST";
+	const rectype_t NAME_PNDT = "PNDT";
 	const rectype_t NAME_RACE = "RACE";
 	const rectype_t NAME_REFR = "REFR";
 	const rectype_t NAME_REGN = "REGN";
@@ -198,6 +199,7 @@ namespace sfwiki {
 	const rectype_t NAME_AVSK = "AVSK";
 	const rectype_t NAME_B0TX = "B0TX";
 	const rectype_t NAME_BAMT = "BAMT";
+	const rectype_t NAME_BDED = "BDED";
 	const rectype_t NAME_BFCB = "BFCB";
 	const rectype_t NAME_BIAD = "BIAD";
 	const rectype_t NAME_BIDS = "BIDS";
@@ -236,6 +238,7 @@ namespace sfwiki {
 	const rectype_t NAME_DALC = "DALC";
 	const rectype_t NAME_DATA = "DATA";
 	const rectype_t NAME_DEMO = "DEMO";
+	const rectype_t NAME_DENS = "DENS";
 	const rectype_t NAME_DESC = "DESC";
 	const rectype_t NAME_DEST = "DEST";
 	const rectype_t NAME_DEVA = "DEVA";
@@ -421,6 +424,7 @@ namespace sfwiki {
 	const rectype_t NAME_RDOT = "RDOT";
 	const rectype_t NAME_RDSA = "RDSA";
 	const rectype_t NAME_RDWT = "RDWT";
+	const rectype_t NAME_RFDP = "RFDP";
 	const rectype_t NAME_RIAD = "RIAD";
 	const rectype_t NAME_RNAM = "RNAM";
 	const rectype_t NAME_RNMV = "RNMV";
@@ -449,6 +453,7 @@ namespace sfwiki {
 	const rectype_t NAME_STOL = "STOL";
 	const rectype_t NAME_SWMV = "SWMV";
 	const rectype_t NAME_TCLT = "TCLT";
+	const rectype_t NAME_TEMP = "TEMP";
 	const rectype_t NAME_TIAD = "TIAD";
 	const rectype_t NAME_TIAS = "TIAS";
 	const rectype_t NAME_TIFC = "TIFC";

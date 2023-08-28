@@ -13,6 +13,7 @@
 #include "../subrecords/floatsubrecord.h"
 #include "../subrecords/dwordsubrecord.h"
 #include "../subrecords/bytesubrecord.h"
+#include "../subrecords/DataSubrecord.h"
   //#include "../subrecords/srsubreccont.h"
   //#include "srrecordfield.h"
   //#include "../srrectypeinfo.h"

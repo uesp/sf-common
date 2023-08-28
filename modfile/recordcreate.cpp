@@ -17,9 +17,12 @@
 #include "records/mgefrecord.h"
 #include "records/miscrecord.h"
 #include "records/npcrecord.h"
+#include "records/pndtrecord.h"
 #include "records/racerecord.h"
+#include "records/qustrecord.h"
 #include "records/spelrecord.h"
 #include "records/stdtrecord.h"
+#include "records/sunprecord.h"
 #include "records/tes4record.h"
 #include "records/weaprecord.h"
 #include "records/wrldrecord.h"
@@ -44,15 +47,18 @@ namespace sfwiki {
 		{ &NAME_MGEF, CMgefRecord::Create },
 		{ &NAME_MISC, CMiscRecord::Create },
 		{ &NAME_NPC_, CNpcRecord::Create  },
+		{ &NAME_PNDT, CPndtRecord::Create },
+		{ &NAME_QUST, CQustRecord::Create },
 		{ &NAME_RACE, CRaceRecord::Create },
 		{ &NAME_SPEL, CSpelRecord::Create },
 		{ &NAME_STDT, CStdtRecord::Create },
+		{ &NAME_SUNP, CSunpRecord::Create },
 		{ &NAME_TES4, CTes4Record::Create },
 		{ &NAME_WEAP, CWeapRecord::Create },
 		{ &NAME_WRLD, CWrldRecord::Create },
 
 		{ &NAME_LVLI, CIdRecord::Create },
-		{ &NAME_SUNP, CIdRecord::Create },
+		
 		{ NULL,		 NULL }	/* Must be last */
 	};
 
