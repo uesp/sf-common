@@ -10,13 +10,16 @@
 #include "records/clasrecord.h"
 #include "records/enchrecord.h"
 #include "records/equprecord.h"
-#include "records/furnrecord.h"
 #include "records/factrecord.h"
+#include "records/florrecord.h"
+#include "records/furnrecord.h"
 #include "records/gmstrecord.h"
 #include "records/lctnrecord.h"
+#include "records/lscrrecord.h"
 #include "records/mgefrecord.h"
 #include "records/miscrecord.h"
 #include "records/npcrecord.h"
+#include "records/perkrecord.h"
 #include "records/pndtrecord.h"
 #include "records/racerecord.h"
 #include "records/qustrecord.h"
@@ -41,12 +44,15 @@ namespace sfwiki {
 		{ &NAME_EQUP, CEqupRecord::Create },
 		{ &NAME_ENCH, CEnchRecord::Create },
 		{ &NAME_FACT, CFactRecord::Create },
+		{ &NAME_FLOR, CFlorRecord::Create },
 		{ &NAME_FURN, CFurnRecord::Create },
 		{ &NAME_GMST, CGmstRecord::Create },
 		{ &NAME_LCTN, CLctnRecord::Create },
+		{ &NAME_LSCR, CLscrRecord::Create },
 		{ &NAME_MGEF, CMgefRecord::Create },
 		{ &NAME_MISC, CMiscRecord::Create },
 		{ &NAME_NPC_, CNpcRecord::Create  },
+		{ &NAME_PERK, CPerkRecord::Create },
 		{ &NAME_PNDT, CPndtRecord::Create },
 		{ &NAME_QUST, CQustRecord::Create },
 		{ &NAME_RACE, CRaceRecord::Create },
