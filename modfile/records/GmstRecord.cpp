@@ -4,7 +4,7 @@
 namespace sfwiki {
 
 	BEGIN_SUBRECCREATE(CGmstRecord, CIdRecord)
-		DEFINE_SUBRECCREATE(NAME_DATA, CFloatSubrecord::Create)
+		DEFINE_SUBRECCREATE(NAME_DATA, CGmstDataSubrecord::Create)
 	END_SUBRECCREATE()
 
 

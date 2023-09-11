@@ -188,6 +188,38 @@ namespace sfwiki {
 	}
 
 
+	std::vector<CBaseRecord *> CEspFile::FindAllRecords(const rectype_t Type)
+	{
+		std::vector<CBaseRecord *> Result;
+
+		for (auto i : m_Records)
+		{
+			if (i->IsGroup())
+				FindAllRecords(Type, Result, dynamic_cast<CGroup *>(i));
+			else if (i->GetRecordType() == Type)
+				Result.push_back(i);
+		}
+
+		return Result;
+	}
+
+
+	bool CEspFile::FindAllRecords(const rectype_t Type, std::vector<CBaseRecord *>& Result, CGroup* pGroup)
+	{
+		if (pGroup == nullptr) return false;
+
+		for (auto i : pGroup->GetRecords())
+		{
+			if (i->IsGroup())
+				FindAllRecords(Type, Result, dynamic_cast<CGroup *>(i));
+			else if (i->GetRecordType() == Type)
+				Result.push_back(i);
+		}
+
+		return true;
+	}
+
+
 	CBaseRecord* CEspFile::FindFormId(const formid_t FormID)
 	{
 		if (m_FormidMap.count(FormID) == 0) return nullptr;

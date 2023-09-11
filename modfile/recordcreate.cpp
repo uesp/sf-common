@@ -7,13 +7,18 @@
 #include "records/avifrecord.h"
 #include "records/biomrecord.h"
 #include "records/bookrecord.h"
+#include "records/cellrecord.h"
 #include "records/clasrecord.h"
+#include "records/dialrecord.h"
 #include "records/enchrecord.h"
 #include "records/equprecord.h"
 #include "records/factrecord.h"
 #include "records/florrecord.h"
+#include "records/flstrecord.h"
 #include "records/furnrecord.h"
+#include "records/gbfmrecord.h"
 #include "records/gmstrecord.h"
+#include "records/inforecord.h"
 #include "records/lctnrecord.h"
 #include "records/lscrrecord.h"
 #include "records/mgefrecord.h"
@@ -40,13 +45,18 @@ namespace sfwiki {
 		{ &NAME_AVIF, CAvifRecord::Create },
 		{ &NAME_BOOK, CBookRecord::Create },
 		{ &NAME_BIOM, CBiomRecord::Create },
+		{ &NAME_CELL, CCellRecord::Create },
 		{ &NAME_CLAS, CClasRecord::Create },
+		{ &NAME_DIAL, CDialRecord::Create },
 		{ &NAME_EQUP, CEqupRecord::Create },
 		{ &NAME_ENCH, CEnchRecord::Create },
 		{ &NAME_FACT, CFactRecord::Create },
 		{ &NAME_FLOR, CFlorRecord::Create },
+		{ &NAME_FLST, CFlstRecord::Create },
 		{ &NAME_FURN, CFurnRecord::Create },
+		{ &NAME_GBFM, CGbfmRecord::Create },
 		{ &NAME_GMST, CGmstRecord::Create },
+		{ &NAME_INFO, CInfoRecord::Create },
 		{ &NAME_LCTN, CLctnRecord::Create },
 		{ &NAME_LSCR, CLscrRecord::Create },
 		{ &NAME_MGEF, CMgefRecord::Create },

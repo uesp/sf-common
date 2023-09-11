@@ -1,22 +1,19 @@
-#ifndef __SFWIKI_GMSTRECORD_H
-#define __SFWIKI_GMSTRECORD_H
+#ifndef __SFWIKI_CELLRECORD_H
+#define __SFWIKI_CELLRECORD_H
 
 
 #include "idrecord.h"
-#include "../subrecords/floatsubrecord.h"
-#include "../subrecords/gmstdatasubrecord.h"
 
 
 namespace sfwiki {
 
-	class CGmstRecord : public CIdRecord
+	class CCellRecord : public CIdRecord
 	{
 		DECLARE_SUBRECCREATE()
-		DECLARE_ALLOCATOR(CGmstRecord, CRecord)
+		DECLARE_ALLOCATOR(CCellRecord, CRecord)
 
 		/*---------- Begin Protected Class Members --------------------*/
 	protected:
-
 
 
 		/*---------- Begin Protected Class Methods --------------------*/
@@ -27,7 +24,7 @@ namespace sfwiki {
 	public:
 
 		/* Class Constructors/Destructors */
-		CGmstRecord();
+		CCellRecord();
 		virtual void Destroy(void);
 
 		/* Initialize a new record */
@@ -36,4 +33,3 @@ namespace sfwiki {
 
 }
 #endif
-

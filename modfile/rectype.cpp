@@ -63,6 +63,7 @@ namespace sfwiki {
 	const rectype_t NAME_FSTP = "FSTP";
 	const rectype_t NAME_FSTS = "FSTS";
 	const rectype_t NAME_FURN = "FURN";
+	const rectype_t NAME_GBFM = "GBFM";
 	const rectype_t NAME_GLOB = "GLOB";
 	const rectype_t NAME_GMST = "GMST";
 	const rectype_t NAME_GRAS = "GRAS";
@@ -468,7 +469,9 @@ namespace sfwiki {
 	const rectype_t NAME_TNAM = "TNAM";
 	const rectype_t NAME_TPIC = "TPIC";
 	const rectype_t NAME_TPLT = "TPLT";
+	const rectype_t NAME_TRDA = "TRDA";
 	const rectype_t NAME_TRDT = "TRDT";
+	const rectype_t NAME_TROT = "TROT";
 	const rectype_t NAME_TVDT = "TVDT";
 	const rectype_t NAME_TWAT = "TWAT";
 	const rectype_t NAME_TX00 = "TX00";

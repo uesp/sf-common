@@ -5,7 +5,7 @@ namespace sfwiki {
 
 
 	CSubrecord::CSubrecord() :
-		m_RecordType(NAME_NULL), m_RecordSize(0)
+		m_RecordType(NAME_NULL), m_RecordSize(0), m_pParent(nullptr)
 	{
 
 	}

@@ -34,7 +34,8 @@ namespace sfwiki {
 #endif
 
 	class CEspFile;
-
+	class CBaseRecord;
+	class CRecord;
 
 #pragma pack(push, 1)
 
@@ -75,8 +76,9 @@ namespace sfwiki {
 
 		/*---------- Begin Protected Class Members --------------------*/
 	protected:
-		rectype_t	m_RecordType;			/* Subrecord header data */
-		dword		m_RecordSize;
+		rectype_t	 m_RecordType;			/* Subrecord header data */
+		dword		 m_RecordSize;
+		CBaseRecord* m_pParent;
 
 
 		/*---------- Begin Protected Class Methods --------------------*/
@@ -138,6 +140,8 @@ namespace sfwiki {
 
 		virtual void LoadLocalStrings(CEspFile* pEspFile) { }
 		virtual void SetLoadLocalString(const bool LoadLocal) { }
+
+		void SetParent(CBaseRecord* pParent) { m_pParent = pParent; }
 
 		/* Input/Output the subrecord to a file */
 		virtual bool Read(CFile& File);

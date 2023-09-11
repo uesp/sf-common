@@ -356,6 +356,8 @@ namespace sfwiki {
 				pSubrecord->SetSpecialSize(*(dword *)pLastRecord->GetData());
 			}
 
+			pSubrecord->SetParent(this);
+
 			Result = pSubrecord->Read(File);
 			if (!Result) return (false);
 

@@ -110,6 +110,7 @@ namespace sfwiki {
 	extern const rectype_t NAME_FSTP;
 	extern const rectype_t NAME_FSTS;
 	extern const rectype_t NAME_FURN;
+	extern const rectype_t NAME_GBFM;
 	extern const rectype_t NAME_GLOB;
 	extern const rectype_t NAME_GMST;
 	extern const rectype_t NAME_GRAS;
@@ -508,7 +509,9 @@ namespace sfwiki {
 	extern const rectype_t NAME_TNAM;
 	extern const rectype_t NAME_TPIC;
 	extern const rectype_t NAME_TPLT;
+	extern const rectype_t NAME_TRDA;
 	extern const rectype_t NAME_TRDT;
+	extern const rectype_t NAME_TROT;
 	extern const rectype_t NAME_TVDT;
 	extern const rectype_t NAME_TWAT;
 	extern const rectype_t NAME_TX00;

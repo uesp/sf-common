@@ -13,7 +13,7 @@ namespace sfwiki {
 
 	struct mgefdata_t
 	{
-		dword	Unknown[36];
+		dword	Unknown[34];
 	};
 
 #pragma pack(pop)

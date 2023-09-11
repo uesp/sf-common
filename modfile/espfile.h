@@ -121,6 +121,9 @@ namespace sfwiki {
 
 		CBaseRecord* FindFormId(const formid_t FormID);
 
+		std::vector<CBaseRecord *> FindAllRecords(const rectype_t Type);
+		bool FindAllRecords(const rectype_t Type, std::vector<CBaseRecord *>& Result, CGroup* pGroup);
+
 		template <typename T> T* FindFormId(const formid_t FormID) {
 			CBaseRecord* pRecord = FindFormId(FormID);
 			if (pRecord == nullptr) return nullptr;
@@ -128,6 +131,7 @@ namespace sfwiki {
 		}
 
 		/* Access the top level groups/records */
+		CBaseRecordVector& GetRecords() { return m_Records; }
 		CBaseRecord* GetTopLevelRecord(const dword Index) { return m_Records[Index]; }
 		size_t       GetNumTopLevelRecords(void) { return m_Records.size(); }
 
