@@ -122,6 +122,7 @@ namespace sfwiki {
 	extern const rectype_t NAME_IMAD;
 	extern const rectype_t NAME_IMGS;
 	extern const rectype_t NAME_INFO;
+	extern const rectype_t NAME_IRES;
 	extern const rectype_t NAME_INGR;
 	extern const rectype_t NAME_IPCT;
 	extern const rectype_t NAME_IPDS;
@@ -149,11 +150,13 @@ namespace sfwiki {
 	extern const rectype_t NAME_NAVI;
 	extern const rectype_t NAME_NAVM;
 	extern const rectype_t NAME_NPC_;
+	extern const rectype_t NAME_OMOD;
 	extern const rectype_t NAME_OTFT;
 	extern const rectype_t NAME_PACK;
 	extern const rectype_t NAME_PERK;
 	extern const rectype_t NAME_PGRE;
 	extern const rectype_t NAME_PHZD;
+	extern const rectype_t NAME_PKIN;
 	extern const rectype_t NAME_PNDT;
 	extern const rectype_t NAME_PROJ;
 	extern const rectype_t NAME_QUST;
@@ -180,7 +183,9 @@ namespace sfwiki {
 	extern const rectype_t NAME_STDT;
 	extern const rectype_t NAME_SUNP;
 	extern const rectype_t NAME_TACT;
+	extern const rectype_t NAME_TERM;
 	extern const rectype_t NAME_TES4;
+	extern const rectype_t NAME_TMLM;
 	extern const rectype_t NAME_TREE;
 	extern const rectype_t NAME_TXST;
 	extern const rectype_t NAME_VTYP;
@@ -327,6 +332,7 @@ namespace sfwiki {
 	extern const rectype_t NAME_FTSM;
 	extern const rectype_t NAME_FTST;
 	extern const rectype_t NAME_FULL;
+	extern const rectype_t NAME_FVPA;
 	extern const rectype_t NAME_G0TX;
 	extern const rectype_t NAME_GIAD;
 	extern const rectype_t NAME_GNAM;
@@ -349,6 +355,10 @@ namespace sfwiki {
 	extern const rectype_t NAME_INAM;
 	extern const rectype_t NAME_INDX;
 	extern const rectype_t NAME_INTV;
+	extern const rectype_t NAME_ISIZ;
+	extern const rectype_t NAME_ISTX;
+	extern const rectype_t NAME_ITID;
+	extern const rectype_t NAME_ISET;
 	extern const rectype_t NAME_ITXT;
 	extern const rectype_t NAME_J0TX;
 	extern const rectype_t NAME_JAIL;
@@ -370,6 +380,7 @@ namespace sfwiki {
 	extern const rectype_t NAME_LIAD;
 	extern const rectype_t NAME_LLCT;
 	extern const rectype_t NAME_LNAM;
+	extern const rectype_t NAME_LRNM;
 	extern const rectype_t NAME_LTMP;
 	extern const rectype_t NAME_LVLD;
 	extern const rectype_t NAME_LVLF;

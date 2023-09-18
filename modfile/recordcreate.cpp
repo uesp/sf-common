@@ -9,6 +9,7 @@
 #include "records/bookrecord.h"
 #include "records/cellrecord.h"
 #include "records/clasrecord.h"
+#include "records/cobjrecord.h"
 #include "records/dialrecord.h"
 #include "records/enchrecord.h"
 #include "records/equprecord.h"
@@ -19,6 +20,7 @@
 #include "records/gbfmrecord.h"
 #include "records/gmstrecord.h"
 #include "records/inforecord.h"
+#include "records/iresrecord.h"
 #include "records/lctnrecord.h"
 #include "records/lscrrecord.h"
 #include "records/mgefrecord.h"
@@ -31,7 +33,9 @@
 #include "records/spelrecord.h"
 #include "records/stdtrecord.h"
 #include "records/sunprecord.h"
+#include "records/termrecord.h"
 #include "records/tes4record.h"
+#include "records/tmlmrecord.h"
 #include "records/weaprecord.h"
 #include "records/wrldrecord.h"
 
@@ -47,6 +51,7 @@ namespace sfwiki {
 		{ &NAME_BIOM, CBiomRecord::Create },
 		{ &NAME_CELL, CCellRecord::Create },
 		{ &NAME_CLAS, CClasRecord::Create },
+		{ &NAME_COBJ, CCobjRecord::Create },
 		{ &NAME_DIAL, CDialRecord::Create },
 		{ &NAME_EQUP, CEqupRecord::Create },
 		{ &NAME_ENCH, CEnchRecord::Create },
@@ -57,6 +62,7 @@ namespace sfwiki {
 		{ &NAME_GBFM, CGbfmRecord::Create },
 		{ &NAME_GMST, CGmstRecord::Create },
 		{ &NAME_INFO, CInfoRecord::Create },
+		{ &NAME_IRES, CIresRecord::Create },
 		{ &NAME_LCTN, CLctnRecord::Create },
 		{ &NAME_LSCR, CLscrRecord::Create },
 		{ &NAME_MGEF, CMgefRecord::Create },
@@ -69,11 +75,18 @@ namespace sfwiki {
 		{ &NAME_SPEL, CSpelRecord::Create },
 		{ &NAME_STDT, CStdtRecord::Create },
 		{ &NAME_SUNP, CSunpRecord::Create },
+		{ &NAME_TERM, CTermRecord::Create },
 		{ &NAME_TES4, CTes4Record::Create },
+		{ &NAME_TMLM, CTmlmRecord::Create },
 		{ &NAME_WEAP, CWeapRecord::Create },
 		{ &NAME_WRLD, CWrldRecord::Create },
 
 		{ &NAME_LVLI, CIdRecord::Create },
+		{ &NAME_OMOD, CIdRecord::Create },
+		{ &NAME_CONT, CIdRecord::Create },
+		{ &NAME_PKIN, CIdRecord::Create },
+		{ &NAME_STAT, CIdRecord::Create },
+		{ &NAME_KYWD, CIdRecord::Create },
 		
 		{ NULL,		 NULL }	/* Must be last */
 	};

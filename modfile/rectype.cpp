@@ -75,6 +75,7 @@ namespace sfwiki {
 	const rectype_t NAME_IMAD = "IMAD";
 	const rectype_t NAME_IMGS = "IMGS";
 	const rectype_t NAME_INFO = "INFO";
+	const rectype_t NAME_IRES = "IRES";
 	const rectype_t NAME_INGR = "INGR";
 	const rectype_t NAME_IPCT = "IPCT";
 	const rectype_t NAME_IPDS = "IPDS";
@@ -102,11 +103,13 @@ namespace sfwiki {
 	const rectype_t NAME_NAVI = "NAVI";
 	const rectype_t NAME_NAVM = "NAVM";
 	const rectype_t NAME_NPC_ = "NPC_";
+	const rectype_t NAME_OMOD = "OMOD";
 	const rectype_t NAME_OTFT = "OTFT";
 	const rectype_t NAME_PACK = "PACK";
 	const rectype_t NAME_PERK = "PERK";
 	const rectype_t NAME_PGRE = "PGRE";
 	const rectype_t NAME_PHZD = "PHZD";
+	const rectype_t NAME_PKIN = "PKIN";
 	const rectype_t NAME_PROJ = "PROJ";
 	const rectype_t NAME_QUST = "QUST";
 	const rectype_t NAME_PNDT = "PNDT";
@@ -133,7 +136,9 @@ namespace sfwiki {
 	const rectype_t NAME_STDT = "STDT";
 	const rectype_t NAME_SUNP = "SUNP";
 	const rectype_t NAME_TACT = "TACT";
+	const rectype_t NAME_TERM = "TERM";
 	const rectype_t NAME_TES4 = "TES4";
+	const rectype_t NAME_TMLM = "TMLM";
 	const rectype_t NAME_TREE = "TREE";
 	const rectype_t NAME_TXST = "TXST";
 	const rectype_t NAME_VTYP = "VTYP";
@@ -287,6 +292,7 @@ namespace sfwiki {
 	const rectype_t NAME_FTSM = "FTSM";
 	const rectype_t NAME_FTST = "FTST";
 	const rectype_t NAME_FULL = "FULL";
+	const rectype_t NAME_FVPA = "FVPA";
 	const rectype_t NAME_G0TX = "G0TX";
 	const rectype_t NAME_GIAD = "GIAD";
 	const rectype_t NAME_GNAM = "GNAM";
@@ -309,6 +315,10 @@ namespace sfwiki {
 	const rectype_t NAME_INAM = "INAM";
 	const rectype_t NAME_INDX = "INDX";
 	const rectype_t NAME_INTV = "INTV";
+	const rectype_t NAME_ISIZ = "ISIZ";
+	const rectype_t NAME_ISTX = "ISTX";
+	const rectype_t NAME_ISET = "ISET";
+	const rectype_t NAME_ITID = "ITID";
 	const rectype_t NAME_ITXT = "ITXT";
 	const rectype_t NAME_J0TX = "J0TX";
 	const rectype_t NAME_JAIL = "JAIL";
@@ -330,6 +340,7 @@ namespace sfwiki {
 	const rectype_t NAME_LIAD = "LIAD";
 	const rectype_t NAME_LLCT = "LLCT";
 	const rectype_t NAME_LNAM = "LNAM";
+	const rectype_t NAME_LRNM = "LRNM";
 	const rectype_t NAME_LTMP = "LTMP";
 	const rectype_t NAME_LVLD = "LVLD";
 	const rectype_t NAME_LVLF = "LVLF";
