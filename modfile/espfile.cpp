@@ -222,6 +222,7 @@ namespace sfwiki {
 
 	CBaseRecord* CEspFile::FindFormId(const formid_t FormID)
 	{
+		if (FormID == 0) return nullptr;
 		if (m_FormidMap.count(FormID) == 0) return nullptr;
 		return m_FormidMap[FormID];
 	}

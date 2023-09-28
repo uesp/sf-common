@@ -13,10 +13,9 @@ namespace sfwiki {
 		DEFINE_SUBRECCREATE(NAME_ITID, CWordSubrecord::Create)
 		DEFINE_SUBRECCREATE(NAME_ISET, CDataSubrecord::Create)
 		DEFINE_SUBRECCREATE(NAME_ITXT, CLStringSubrecord::Create)
-		DEFINE_SUBRECCREATE(NAME_SNAM, CLStringSubrecord::Create)
+		DEFINE_SUBRECCREATE(NAME_SNAM, CDwordSubrecord::Create)
 		DEFINE_SUBRECCREATE(NAME_TNAM, CDwordSubrecord::Create)
 		DEFINE_SUBRECCREATE(NAME_UNAM, CLStringSubrecord::Create)
-	
 	END_SUBRECCREATE()
 
 

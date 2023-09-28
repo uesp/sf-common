@@ -26,6 +26,7 @@
 #include "records/mgefrecord.h"
 #include "records/miscrecord.h"
 #include "records/npcrecord.h"
+#include "records/omodrecord.h"
 #include "records/perkrecord.h"
 #include "records/pndtrecord.h"
 #include "records/racerecord.h"
@@ -68,6 +69,7 @@ namespace sfwiki {
 		{ &NAME_MGEF, CMgefRecord::Create },
 		{ &NAME_MISC, CMiscRecord::Create },
 		{ &NAME_NPC_, CNpcRecord::Create  },
+		{ &NAME_OMOD, COmodRecord::Create },
 		{ &NAME_PERK, CPerkRecord::Create },
 		{ &NAME_PNDT, CPndtRecord::Create },
 		{ &NAME_QUST, CQustRecord::Create },
@@ -86,7 +88,7 @@ namespace sfwiki {
 		{ &NAME_CONT, CIdRecord::Create },
 		{ &NAME_PKIN, CIdRecord::Create },
 		{ &NAME_STAT, CIdRecord::Create },
-		{ &NAME_KYWD, CIdRecord::Create },
+		{ &NAME_KYWD, CItem1Record::Create },
 		
 		{ NULL,		 NULL }	/* Must be last */
 	};

@@ -21,6 +21,7 @@ namespace sfwiki {
 		DEFINE_SUBRECCREATE(NAME_RNAM, CLStringSubrecord::Create)
 		DEFINE_SUBRECCREATE(NAME_TRDA, CDataSubrecord::Create) //12 bytes
 		DEFINE_SUBRECCREATE(NAME_TROT, CDataSubrecord::Create) //8 bytes
+		DEFINE_SUBRECCREATE(NAME_CTDA, CCtdaSubrecord::Create)
 	END_SUBRECCREATE()
 
 

@@ -41,7 +41,7 @@ namespace sfwiki {
 		}
 		else
 		{
-			SystemLog.Printf("Failed to find localized string id %d!", m_StringID);
+			SystemLog.Printf("CLStringSubrecord: Failed to find localized string id %d (%4.4s, parent %4.4s 0x%X)!", m_StringID, GetRecordType().Name, m_pParent->GetRecordType().Name, m_pParent->GetFormID());
 		}
 	}
 

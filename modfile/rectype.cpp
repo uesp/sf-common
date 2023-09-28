@@ -281,6 +281,7 @@ namespace sfwiki {
 	const rectype_t NAME_F0TX = "F0TX";
 	const rectype_t NAME_FCHT = "FCHT";
 	const rectype_t NAME_FIAD = "FIAD";
+	const rectype_t NAME_FLLD = "FLLD";
 	const rectype_t NAME_FLMV = "FLMV";
 	const rectype_t NAME_FLTR = "FLTR";
 	const rectype_t NAME_FLTV = "FLTV";
@@ -392,6 +393,7 @@ namespace sfwiki {
 	const rectype_t NAME_NVNM = "NVNM";
 	const rectype_t NAME_NVPP = "NVPP";
 	const rectype_t NAME_OBND = "OBND";
+	const rectype_t NAME_OBTE = "OBTE";
 	const rectype_t NAME_OFST = "OFST";
 	const rectype_t NAME_OIAD = "OIAD";
 	const rectype_t NAME_ONAM = "ONAM";
@@ -532,6 +534,7 @@ namespace sfwiki {
 	const rectype_t NAME_XEMI = "XEMI";
 	const rectype_t NAME_XESP = "XESP";
 	const rectype_t NAME_XEZN = "XEZN";
+	const rectype_t NAME_XFLG = "XFLG";
 	const rectype_t NAME_XFVC = "XFVC";
 	const rectype_t NAME_XHOR = "XHOR";
 	const rectype_t NAME_XHTW = "XHTW";

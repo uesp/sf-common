@@ -46,7 +46,7 @@ namespace sfwiki {
 		}
 		else
 		{
-			SystemLog.Printf("Failed to find localized string id %d!", m_Data.iValue);
+			SystemLog.Printf("CGmstDataSubrecord: Failed to find localized string id %d!", m_Data.iValue);
 		}
 
 	}

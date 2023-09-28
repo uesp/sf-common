@@ -1,17 +1,17 @@
-#ifndef __SFWIKI_INFORECORD_H
-#define __SFWIKI_INFORECORD_H
+#ifndef __SFWIKI_OMODRECORD_H
+#define __SFWIKI_OMODRECORD_H
 
 
 #include "idrecord.h"
-#include "../subrecords/CtdaSubrecord.h"
+#include "../subrecords/omoddatasubrecord.h"
 
 
 namespace sfwiki {
 
-	class CInfoRecord : public CIdRecord
+	class COmodRecord : public CIdRecord
 	{
 		DECLARE_SUBRECCREATE()
-		DECLARE_ALLOCATOR(CInfoRecord, CRecord)
+		DECLARE_ALLOCATOR(COmodRecord, CRecord)
 
 		/*---------- Begin Protected Class Members --------------------*/
 	protected:
@@ -25,7 +25,7 @@ namespace sfwiki {
 	public:
 
 		/* Class Constructors/Destructors */
-		CInfoRecord();
+		COmodRecord();
 		virtual void Destroy(void);
 
 		/* Initialize a new record */

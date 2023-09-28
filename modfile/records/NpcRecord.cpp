@@ -10,6 +10,7 @@ namespace sfwiki {
 		DEFINE_SUBRECCREATE(NAME_RNAM, CFormidSubrecord::Create)
 		DEFINE_SUBRECCREATE(NAME_WNAM, CFormidSubrecord::Create)
 		DEFINE_SUBRECCREATE(NAME_SNAM, CSnamNpcSubrecord::Create)
+		DEFINE_SUBRECCREATE(NAME_OBTE, CDwordSubrecord::Create)
 	END_SUBRECCREATE()
 
 

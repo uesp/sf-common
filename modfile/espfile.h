@@ -125,6 +125,7 @@ namespace sfwiki {
 		bool FindAllRecords(const rectype_t Type, std::vector<CBaseRecord *>& Result, CGroup* pGroup);
 
 		template <typename T> T* FindFormId(const formid_t FormID) {
+			if (FormID == 0) return nullptr;
 			CBaseRecord* pRecord = FindFormId(FormID);
 			if (pRecord == nullptr) return nullptr;
 			return dynamic_cast<T*>(pRecord);

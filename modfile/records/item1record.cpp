@@ -4,8 +4,8 @@
 namespace sfwiki {
 
 	BEGIN_SUBRECCREATE(CItem1Record, CIdKeyRecord)
-		//DEFINE_SUBRECCREATE(NAME_FULL, CLStringSubrecord::Create)
-		//DEFINE_SUBRECCREATE(NAME_MODL, CModlSubrecord::Create)
+		DEFINE_SUBRECCREATE(NAME_FULL, CLStringSubrecord::Create)
+		DEFINE_SUBRECCREATE(NAME_MODL, CStringSubrecord::Create)
 		//DEFINE_SUBRECCREATE(NAME_ICON, CIconSubrecord::Create)
 	END_SUBRECCREATE()
 

@@ -4,7 +4,7 @@ namespace sfwiki {
 
 	const rectype_t NAME_BDST = "BDST";
 	const rectype_t NAME_BFCE = "BFCE";
-	const rectype_t NAME_FLLD = "FLLD";
+	//const rectype_t NAME_FLLD = "FLLD";
 	const rectype_t NAME_MCQP = "MCQP";
 	const rectype_t NAME_PCCC = "PCCC";
 	const rectype_t NAME_PHLA = "PHLA";

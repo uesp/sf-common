@@ -321,6 +321,7 @@ namespace sfwiki {
 	extern const rectype_t NAME_F0TX;
 	extern const rectype_t NAME_FCHT;
 	extern const rectype_t NAME_FIAD;
+	extern const rectype_t NAME_FLLD;
 	extern const rectype_t NAME_FLMV;
 	extern const rectype_t NAME_FLTR;
 	extern const rectype_t NAME_FLTV;
@@ -432,6 +433,7 @@ namespace sfwiki {
 	extern const rectype_t NAME_NVNM;
 	extern const rectype_t NAME_NVPP;
 	extern const rectype_t NAME_OBND;
+	extern const rectype_t NAME_OBTE;
 	extern const rectype_t NAME_OFST;
 	extern const rectype_t NAME_OIAD;
 	extern const rectype_t NAME_ONAM;
@@ -572,6 +574,7 @@ namespace sfwiki {
 	extern const rectype_t NAME_XEMI;
 	extern const rectype_t NAME_XESP;
 	extern const rectype_t NAME_XEZN;
+	extern const rectype_t NAME_XFLG;
 	extern const rectype_t NAME_XFVC;
 	extern const rectype_t NAME_XHOR;
 	extern const rectype_t NAME_XHTW;

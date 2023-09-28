@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "string.h"
+#include <cassert>
 
 #ifdef _WIN32
 #else
