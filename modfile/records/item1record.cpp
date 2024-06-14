@@ -26,6 +26,14 @@ namespace sfwiki {
 	}
 
 
+	string CItem1Record::GetItemName(void) const
+	{
+		auto pFull = FindSubrecord<CLStringSubrecord>(NAME_FULL);
+		if (pFull == nullptr) return "";
+		return pFull->GetString();
+	}
+
+
 	void CItem1Record::InitializeNew(void)
 	{
 

@@ -37,7 +37,6 @@ namespace sfwiki {
 		DEFINE_SUBRECCREATE(NAME_CNAM, CDataSubrecord::Create)
 		DEFINE_SUBRECCREATE(NAME_FLLD, CDataSubrecord::Create)
 		
-		
 		DEFINE_SUBRECCREATE(NAME_INAM, CDataSubrecord::Create)
 		DEFINE_SUBRECCREATE(NAME_KNAM, CDataSubrecord::Create)
 		DEFINE_SUBRECCREATE(NAME_KSIZ, CDataSubrecord::Create)

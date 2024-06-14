@@ -246,7 +246,7 @@ namespace sfwiki {
 	}
 
 
-	int CRecord::FindSubrecord(const rectype_t Type, const int StartIndex)
+	int CRecord::FindSubrecord(const rectype_t Type, const int StartIndex) const
 	{
 		for (int i = StartIndex; i < m_Subrecords.size(); ++i)
 		{

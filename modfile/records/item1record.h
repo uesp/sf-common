@@ -41,6 +41,9 @@ namespace sfwiki {
 		/* Used to determine if the record type has a FULL item name field */
 		virtual bool HasFullItemName(void) { return (true); }
 
+		string GetItemName(void) const;
+		bool HasItemName(void) const { return GetItemName().empty(); }
+
 		/* Initialize a new record */
 		void InitializeNew(void);
 

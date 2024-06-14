@@ -23,6 +23,7 @@
 #include "records/iresrecord.h"
 #include "records/lctnrecord.h"
 #include "records/lscrrecord.h"
+#include "records/lvlirecord.h"
 #include "records/mgefrecord.h"
 #include "records/miscrecord.h"
 #include "records/npcrecord.h"
@@ -66,6 +67,7 @@ namespace sfwiki {
 		{ &NAME_IRES, CIresRecord::Create },
 		{ &NAME_LCTN, CLctnRecord::Create },
 		{ &NAME_LSCR, CLscrRecord::Create },
+		{ &NAME_LVLI, CLvliRecord::Create },
 		{ &NAME_MGEF, CMgefRecord::Create },
 		{ &NAME_MISC, CMiscRecord::Create },
 		{ &NAME_NPC_, CNpcRecord::Create  },
@@ -89,7 +91,6 @@ namespace sfwiki {
 		{ &NAME_PKIN, CIdRecord::Create },
 		{ &NAME_STAT, CIdRecord::Create },
 		{ &NAME_KYWD, CItem1Record::Create },
-		
 		{ NULL,		 NULL }	/* Must be last */
 	};
 

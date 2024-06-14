@@ -380,12 +380,15 @@ namespace sfwiki {
 	extern const rectype_t NAME_LCUN;
 	extern const rectype_t NAME_LIAD;
 	extern const rectype_t NAME_LLCT;
+	extern const rectype_t NAME_LLKC;
 	extern const rectype_t NAME_LNAM;
 	extern const rectype_t NAME_LRNM;
 	extern const rectype_t NAME_LTMP;
 	extern const rectype_t NAME_LVLD;
 	extern const rectype_t NAME_LVLF;
 	extern const rectype_t NAME_LVLG;
+	extern const rectype_t NAME_LVLL;
+	extern const rectype_t NAME_LVLM;
 	extern const rectype_t NAME_LVLO;
 	extern const rectype_t NAME_MAST;
 	extern const rectype_t NAME_MCHT;
@@ -434,6 +437,7 @@ namespace sfwiki {
 	extern const rectype_t NAME_NVPP;
 	extern const rectype_t NAME_OBND;
 	extern const rectype_t NAME_OBTE;
+	extern const rectype_t NAME_OBTS;
 	extern const rectype_t NAME_OFST;
 	extern const rectype_t NAME_OIAD;
 	extern const rectype_t NAME_ONAM;

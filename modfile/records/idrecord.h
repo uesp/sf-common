@@ -35,6 +35,9 @@ namespace sfwiki {
 		//bool          IsEditorID(const SSCHAR* pString) { return SafeStringCompare(GetEditorID(), pString, true) == 0; }
 		//bool          HasEditorID(void) const { return (m_pEditorID != NULL && m_pEditorID->GetString()[0] != NULL_CHAR); }
 
+		string GetEditorId(void) const;
+		bool HasEditorId(void) const { return GetEditorId().empty(); }
+
 		/* Initialize a new record */
 		virtual void InitializeNew(void);
 

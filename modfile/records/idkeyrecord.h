@@ -2,22 +2,22 @@
 #define __SFWIKI_IDKEYRECORD_H
 
 #include "idrecord.h"
+#include "../subrecords/formidarraysubrecord.h"
+
 
 namespace sfwiki {
 
-	#define KEYWORD_SEPCHAR ','
 
-	class CIdKeyRecord : public CIdRecord {
+	class CIdKeyRecord : public CIdRecord 
+	{
 		DECLARE_SUBRECCREATE()
 		DECLARE_ALLOCATOR(CIdKeyRecord, CRecord)
-		
+
+		const char KEYWORD_SEPCHAR = ',';
 
 
 		/*---------- Begin Protected Class Members --------------------*/
 	protected:
-		//CSrDwordSubrecord*		m_pKeywordCount;
-		//CFormidArraySubrecord*	m_pKeywords;
-		//bool					m_HasKeywords;
 
 
 		/*---------- Begin Protected Class Methods --------------------*/
@@ -29,8 +29,14 @@ namespace sfwiki {
 
 		/* Class Constructors/Destructors */
 		CIdKeyRecord();
-		//virtual ~CIdKeyRecord() { Destroy(); }
 		virtual void Destroy(void);
+
+		dword GetNumKeywords(void) const;
+		formidarray_t* GetKeywords(void);
+		formidarray_t& GetKeywordsRef(void);
+		bool HasKeyword(const formid_t formId) const;
+		bool HasKeyword(const string keyword) const;
+
 
 		/* Initialize a new record */
 		virtual void InitializeNew(void);

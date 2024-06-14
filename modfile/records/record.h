@@ -16,6 +16,7 @@
 #include "../subrecords/bytesubrecord.h"
 #include "../subrecords/DataSubrecord.h"
 #include "../subrecords/VmadSubrecord.h"
+#include <typeinfo>
   //#include "../subrecords/srsubreccont.h"
   //#include "srrecordfield.h"
   //#include "../srrectypeinfo.h"
@@ -162,9 +163,9 @@ namespace sfwiki {
 
 		/* Find a record based on its formID */
 		//CBaseRecord* FindFormID(const formid_t FormID) { return (m_Header.FormID == FormID ? this : nullptr); }
-		int FindSubrecord(const rectype_t Type, const int StartIndex = 0);
+		int FindSubrecord(const rectype_t Type, const int StartIndex = 0) const;
 
-		template <typename T> T* FindSubrecord(const rectype_t Type, int StartIndex = 0) {
+		template <typename T> T* FindSubrecord(const rectype_t Type, int StartIndex = 0) const {
 			T* pResult = nullptr;
 
 			do {
@@ -189,6 +190,86 @@ namespace sfwiki {
 
 			return result;
 		}
+
+		template <typename T> T GetSubrecordValue(const rectype_t Type, const T defaultValue ) const {
+			auto pSubrecord = FindSubrecord<CFloatSubrecord>(Type, 0);
+			if (pSubrecord == nullptr) return defaultValue;
+			return T(pSubrecord->GetValue());
+		}
+
+		template <> float GetSubrecordValue<float>(const rectype_t Type, const float defaultValue ) const {
+			auto pSubrecord = FindSubrecord<CFloatSubrecord>(Type, 0);
+			if (pSubrecord == nullptr) return defaultValue;
+			return pSubrecord->GetValue();
+		}
+
+		template <> byte GetSubrecordValue<byte>(const rectype_t Type, const byte defaultValue) const {
+			auto pSubrecord = FindSubrecord<CByteSubrecord>(Type, 0);
+			if (pSubrecord == nullptr) return defaultValue;
+			return pSubrecord->GetValue();
+		}
+
+		template <> word GetSubrecordValue<word>(const rectype_t Type, const word defaultValue) const {
+			auto pSubrecord = FindSubrecord<CWordSubrecord>(Type, 0);
+			if (pSubrecord == nullptr) return defaultValue;
+			return pSubrecord->GetValue();
+		}
+
+		template <> dword GetSubrecordValue<dword>(const rectype_t Type, const dword defaultValue) const {
+			auto pSubrecord = FindSubrecord<CDwordSubrecord>(Type, 0);
+			if (pSubrecord == nullptr) return defaultValue;
+			return pSubrecord->GetValue();
+		}
+
+		template <> string GetSubrecordValue<string>(const rectype_t Type, const string defaultValue) const {
+			auto pSubrecord = FindSubrecord<CStringSubrecord>(Type, 0);
+
+			if (pSubrecord == nullptr) {
+				auto pSubrecord = FindSubrecord<CLStringSubrecord>(Type, 0);
+				if (pSubrecord == nullptr) return defaultValue;
+				return pSubrecord->GetString();
+			}
+
+			return pSubrecord->GetString();
+		}
+
+		template <> const char* GetSubrecordValue<const char*>(const rectype_t Type, const char* defaultValue) const {
+			auto pSubrecord = FindSubrecord<CStringSubrecord>(Type, 0);
+
+			if (pSubrecord == nullptr) {
+				auto pSubrecord = FindSubrecord<CLStringSubrecord>(Type, 0);
+				if (pSubrecord == nullptr) return defaultValue;
+				return pSubrecord->GetString().c_str();
+			}
+
+			return pSubrecord->GetString().c_str();
+		}
+
+		/*
+		template <typename T> T GetSubrecordValue(const rectype_t Type, const int StartIndex = 0, const T defaultValue = 0) const {
+			CSubrecord* pResult = nullptr;
+
+			do {
+				int i = FindSubrecord(Type, StartIndex);
+				if (i < 0) return defaultValue;
+
+				pResult = m_Subrecords[i];
+				
+				if (typeid(pResult).name() == "CDwordSubrecord")
+					pResult = dynamic_cast<CDwordSubrecord*>(pResult);
+				else if (typeid(pResult).name() == "CWordSubrecord")
+					pResult = dynamic_cast<CWordSubrecord*>(pResult);
+				else if (typeid(pResult).name() == "CByteSubrecord")
+					pResult = dynamic_cast<CByteSubrecord*>(pResult);
+				else if (typeid(pResult).name() == "CFloatSubrecord")
+					pResult = dynamic_cast<CFloatSubrecord*>(pResult);
+
+				StartIndex = i + 1;
+			} while (pResult == nullptr);
+
+			if (pResult == nullptr) return defaultValue;
+			return T(pResult->GetValue());
+		} //*/
 
 		/* Computes the size in bytes needed to output all sub-records */
 		dword GetSubrecordSize(void);

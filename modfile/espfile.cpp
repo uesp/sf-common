@@ -455,13 +455,18 @@ namespace sfwiki {
 		Result = CRecord::InitIOBuffers();
 		if (!Result) return false;
 
+		int j = 0;
+
 		for (auto i : pGroup->GetRecords())
 		{
+			j++;
+			printf("\t%d of %d...\n", j, (int) pGroup->GetRecords().size());
+
 			auto pRecord = dynamic_cast<CRecord *>(i);
 			if (pRecord == nullptr) continue;
 			
 			auto isCompressed = pRecord->IsCompressed();
-			if (isCompressed) pRecord->SetCompressed(false);
+			pRecord->SetCompressed(false);
 
 			Result = i->Write(m_File);
 

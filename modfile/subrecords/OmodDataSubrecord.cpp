@@ -64,24 +64,7 @@ namespace sfwiki {
 		ClearData();
 		m_RecordSize = OMODDATA_MINSUBRECORD_SIZE;
 	}
-	/*
-	struct omoddatainclude_t {
-		dword modFormId;
-		byte  minLevel;
-		byte  optional;
-		byte  notUseAll;
-	};
-
-	struct omoddataproperty_t {
-		dword valueType;
-		dword valeFunction;
-		rectype_t propertyName;
-		dword Value1;
-		dword Value2;
-		float Step;
-	};
-	*/
-
+	
 
 	bool COmodDataSubrecord::ReadData(CFile& File)
 	{

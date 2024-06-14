@@ -1,22 +1,18 @@
-#pragma once
-#ifndef __SFWIKI_NPC_RECORD_H
-#define __SFWIKI_NPC_RECORD_H
+#ifndef __SFWIKI_LVLIRECORD_H
+#define __SFWIKI_LVLIRECORD_H
 
 
-#include "idkeyrecord.h"
-#include "../subrecords/stringSubrecord.h"
-#include "../subrecords/lstringSubrecord.h"
-#include "../subrecords/acbsnpcsubrecord.h"
-#include "../subrecords/snamnpcsubrecord.h"
-#include "../subrecords/obtssubrecord.h"
+#include "item1record.h"
+#include "../subrecords/LvloSubrecord.h"
+#include "../subrecords/LlkcSubrecord.h"
 
 
 namespace sfwiki {
 
-	class CNpcRecord : public CIdKeyRecord
+	class CLvliRecord : public CItem1Record
 	{
 		DECLARE_SUBRECCREATE()
-		DECLARE_ALLOCATOR(CNpcRecord, CRecord)
+		DECLARE_ALLOCATOR(CLvliRecord, CRecord)
 
 		/*---------- Begin Protected Class Members --------------------*/
 	protected:
@@ -30,7 +26,7 @@ namespace sfwiki {
 	public:
 
 		/* Class Constructors/Destructors */
-		CNpcRecord();
+		CLvliRecord();
 		virtual void Destroy(void);
 
 		/* Initialize a new record */
@@ -39,3 +35,4 @@ namespace sfwiki {
 
 }
 #endif
+

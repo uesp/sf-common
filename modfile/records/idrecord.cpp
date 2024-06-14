@@ -22,7 +22,15 @@ namespace sfwiki {
 
 		CRecord::Destroy();
 	}
-	
+
+
+	string CIdRecord::GetEditorId(void) const
+	{
+		auto pEditorId = FindSubrecord<CStringSubrecord>(NAME_EDID);
+		if (pEditorId == nullptr) return "";
+		return pEditorId->GetString();
+	}
+
 
 	void CIdRecord::InitializeNew(void)
 	{

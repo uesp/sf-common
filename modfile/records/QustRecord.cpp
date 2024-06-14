@@ -8,6 +8,7 @@ namespace sfwiki {
 		DEFINE_SUBRECCREATE(NAME_CNAM, CLStringSubrecord::Create)
 		DEFINE_SUBRECCREATE(NAME_NAM1, CStringSubrecord::Create)
 		DEFINE_SUBRECCREATE(NAME_NAM2, CStringSubrecord::Create)
+		DEFINE_SUBRECCREATE(NAME_NAM3, CStringSubrecord::Create)
 		DEFINE_SUBRECCREATE(NAME_INDX, CDwordSubrecord::Create)
 
 		DEFINE_SUBRECCREATE(NAME_QOBJ, CWordSubrecord::Create)

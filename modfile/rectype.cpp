@@ -340,11 +340,14 @@ namespace sfwiki {
 	const rectype_t NAME_LCUN = "LCUN";
 	const rectype_t NAME_LIAD = "LIAD";
 	const rectype_t NAME_LLCT = "LLCT";
+	const rectype_t NAME_LLKC = "LLKC";
 	const rectype_t NAME_LNAM = "LNAM";
 	const rectype_t NAME_LRNM = "LRNM";
 	const rectype_t NAME_LTMP = "LTMP";
 	const rectype_t NAME_LVLD = "LVLD";
 	const rectype_t NAME_LVLF = "LVLF";
+	const rectype_t NAME_LVLL = "LVLL";
+	const rectype_t NAME_LVLM = "LVLM";
 	const rectype_t NAME_LVLG = "LVLG";
 	const rectype_t NAME_LVLO = "LVLO";
 	const rectype_t NAME_MAST = "MAST";
@@ -394,6 +397,7 @@ namespace sfwiki {
 	const rectype_t NAME_NVPP = "NVPP";
 	const rectype_t NAME_OBND = "OBND";
 	const rectype_t NAME_OBTE = "OBTE";
+	const rectype_t NAME_OBTS = "OBTS";
 	const rectype_t NAME_OFST = "OFST";
 	const rectype_t NAME_OIAD = "OIAD";
 	const rectype_t NAME_ONAM = "ONAM";
