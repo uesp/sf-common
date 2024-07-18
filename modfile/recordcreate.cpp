@@ -31,6 +31,7 @@
 #include "records/perkrecord.h"
 #include "records/pndtrecord.h"
 #include "records/racerecord.h"
+#include "records/refrrecord.h"
 #include "records/qustrecord.h"
 #include "records/spelrecord.h"
 #include "records/stdtrecord.h"
@@ -76,6 +77,7 @@ namespace sfwiki {
 		{ &NAME_PNDT, CPndtRecord::Create },
 		{ &NAME_QUST, CQustRecord::Create },
 		{ &NAME_RACE, CRaceRecord::Create },
+		{ &NAME_REFR, CRefrRecord::Create },
 		{ &NAME_SPEL, CSpelRecord::Create },
 		{ &NAME_STDT, CStdtRecord::Create },
 		{ &NAME_SUNP, CSunpRecord::Create },

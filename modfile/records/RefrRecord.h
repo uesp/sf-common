@@ -1,16 +1,16 @@
-#ifndef __SFWIKI_CELLRECORD_H
-#define __SFWIKI_CELLRECORD_H
+#ifndef __SFWIKI_REFRRECORD_H
+#define __SFWIKI_REFRRECORD_H
 
 
-#include "item1record.h"
+#include "idrecord.h"
 
 
 namespace sfwiki {
 
-	class CCellRecord : public CIdRecord
+	class CRefrRecord : public CIdRecord
 	{
 		DECLARE_SUBRECCREATE()
-		DECLARE_ALLOCATOR(CCellRecord, CRecord)
+		DECLARE_ALLOCATOR(CRefrRecord, CRecord)
 
 		/*---------- Begin Protected Class Members --------------------*/
 	protected:
@@ -24,8 +24,15 @@ namespace sfwiki {
 	public:
 
 		/* Class Constructors/Destructors */
-		CCellRecord();
+		CRefrRecord();
 		virtual void Destroy(void);
+
+		dword GetRefId(void) const
+		{
+			auto pId = FindSubrecord<CDwordSubrecord>(NAME_NAME);
+			if (pId == nullptr) return 0;
+			return pId->GetValue();
+		}
 
 		/* Initialize a new record */
 		void InitializeNew(void);
@@ -33,3 +40,4 @@ namespace sfwiki {
 
 }
 #endif
+#pragma once

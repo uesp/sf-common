@@ -112,6 +112,30 @@ namespace sfwiki {
 
 		CBaseRecord* FindFormId(const formid_t FormID);
 
+		template <typename T> std::vector<T*> FindAllRecords(const rectype_t Type) {
+			std::vector<T*> result;
+
+			for (auto i : m_Records)
+			{
+				if (i->IsGroup())
+				{
+					CGroup* pG = dynamic_cast<CGroup*>(i);
+					if (pG != nullptr) 
+					{
+						auto b = pG->FindAllRecords<T>(Type);
+						result.insert(result.end(), b.begin(), b.end());
+					}
+				}
+				else if (i->GetRecordType() == Type)
+				{
+					T* pT = dynamic_cast<T*>(i);
+					if (pT != nullptr) result.push_back(pT);
+				}
+			}
+
+			return result;
+		}
+
 		/* Get class members */
 		const rectype_t			GetRecordType(void) const { return (m_Header.RecordType); }
 		int						GetType(void) const { return (m_Header.GroupType); }
